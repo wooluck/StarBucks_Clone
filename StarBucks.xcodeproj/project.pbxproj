@@ -17,9 +17,11 @@
 		7AB3CD7D2918F7C50001415F /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD7C2918F7C50001415F /* OrderViewController.swift */; };
 		7AB3CD7F2918F7CA0001415F /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD7E2918F7CA0001415F /* ShopViewController.swift */; };
 		7AB3CD812918F7D40001415F /* OtherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD802918F7D40001415F /* OtherViewController.swift */; };
+		F30DC839C97BD978238C1EF3 /* Pods_StarBucks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB1500B4BBF580FA724E1AF /* Pods_StarBucks.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7AB1500B4BBF580FA724E1AF /* Pods_StarBucks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StarBucks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AB3CD632918F5EF0001415F /* StarBucks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarBucks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AB3CD662918F5EF0001415F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AB3CD682918F5EF0001415F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -32,6 +34,8 @@
 		7AB3CD7C2918F7C50001415F /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
 		7AB3CD7E2918F7CA0001415F /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		7AB3CD802918F7D40001415F /* OtherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherViewController.swift; sourceTree = "<group>"; };
+		A2FA4B8515E4C0AC055C5A0C /* Pods-StarBucks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StarBucks.release.xcconfig"; path = "Target Support Files/Pods-StarBucks/Pods-StarBucks.release.xcconfig"; sourceTree = "<group>"; };
+		FC485EB63C0EBCA57BE4052E /* Pods-StarBucks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StarBucks.debug.xcconfig"; path = "Target Support Files/Pods-StarBucks/Pods-StarBucks.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,17 +43,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F30DC839C97BD978238C1EF3 /* Pods_StarBucks.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E2A3F29CD93C9B371CEB219 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FC485EB63C0EBCA57BE4052E /* Pods-StarBucks.debug.xcconfig */,
+				A2FA4B8515E4C0AC055C5A0C /* Pods-StarBucks.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		5237242419D679E44D8919FD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7AB1500B4BBF580FA724E1AF /* Pods_StarBucks.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7AB3CD5A2918F5EF0001415F = {
 			isa = PBXGroup;
 			children = (
 				7AB3CD652918F5EF0001415F /* StarBucks */,
 				7AB3CD642918F5EF0001415F /* Products */,
+				3E2A3F29CD93C9B371CEB219 /* Pods */,
+				5237242419D679E44D8919FD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,9 +111,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7AB3CD772918F5F00001415F /* Build configuration list for PBXNativeTarget "StarBucks" */;
 			buildPhases = (
+				2AE0750174F801F7C6C5D0B8 /* [CP] Check Pods Manifest.lock */,
 				7AB3CD5F2918F5EF0001415F /* Sources */,
 				7AB3CD602918F5EF0001415F /* Frameworks */,
 				7AB3CD612918F5EF0001415F /* Resources */,
+				510B66E9DF271F45D91DB767 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -144,6 +171,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2AE0750174F801F7C6C5D0B8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-StarBucks-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		510B66E9DF271F45D91DB767 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-StarBucks/Pods-StarBucks-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-StarBucks/Pods-StarBucks-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StarBucks/Pods-StarBucks-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7AB3CD5F2918F5EF0001415F /* Sources */ = {
@@ -298,6 +367,7 @@
 		};
 		7AB3CD782918F5F00001415F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FC485EB63C0EBCA57BE4052E /* Pods-StarBucks.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -325,6 +395,7 @@
 		};
 		7AB3CD792918F5F00001415F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A2FA4B8515E4C0AC055C5A0C /* Pods-StarBucks.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

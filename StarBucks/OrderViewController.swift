@@ -8,11 +8,25 @@
 import UIKit
 
 class OrderViewController: UIViewController {
+    
+    private lazy var titleMenus = UIView()
 
+    // MARK: - viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .white
+        setupNav()
     }
+}
 
-
+// MARK: - extension
+extension OrderViewController {
+    private func setupNav() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = "Order"
+        
+        let magnifyingglassBtn = UIBarButtonItem(image: .init(systemName: "magnifyingglass"), style: .plain, target: self, action: nil)
+        magnifyingglassBtn.tintColor = .gray
+        self.navigationItem.rightBarButtonItem = magnifyingglassBtn
+    }
 }
