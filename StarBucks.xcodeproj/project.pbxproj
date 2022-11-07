@@ -17,6 +17,9 @@
 		7AB3CD7D2918F7C50001415F /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD7C2918F7C50001415F /* OrderViewController.swift */; };
 		7AB3CD7F2918F7CA0001415F /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD7E2918F7CA0001415F /* ShopViewController.swift */; };
 		7AB3CD812918F7D40001415F /* OtherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD802918F7D40001415F /* OtherViewController.swift */; };
+		7AB3CD85291909FE0001415F /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD84291909FE0001415F /* UIView.swift */; };
+		7AB3CD8729190A190001415F /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD8629190A190001415F /* UIColor.swift */; };
+		7AB3CD8929190D070001415F /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD8829190D070001415F /* CALayer.swift */; };
 		F30DC839C97BD978238C1EF3 /* Pods_StarBucks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB1500B4BBF580FA724E1AF /* Pods_StarBucks.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +37,9 @@
 		7AB3CD7C2918F7C50001415F /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
 		7AB3CD7E2918F7CA0001415F /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		7AB3CD802918F7D40001415F /* OtherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherViewController.swift; sourceTree = "<group>"; };
+		7AB3CD84291909FE0001415F /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		7AB3CD8629190A190001415F /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		7AB3CD8829190D070001415F /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
 		A2FA4B8515E4C0AC055C5A0C /* Pods-StarBucks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StarBucks.release.xcconfig"; path = "Target Support Files/Pods-StarBucks/Pods-StarBucks.release.xcconfig"; sourceTree = "<group>"; };
 		FC485EB63C0EBCA57BE4052E /* Pods-StarBucks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StarBucks.debug.xcconfig"; path = "Target Support Files/Pods-StarBucks/Pods-StarBucks.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -56,7 +62,6 @@
 				FC485EB63C0EBCA57BE4052E /* Pods-StarBucks.debug.xcconfig */,
 				A2FA4B8515E4C0AC055C5A0C /* Pods-StarBucks.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -89,19 +94,38 @@
 		7AB3CD652918F5EF0001415F /* StarBucks */ = {
 			isa = PBXGroup;
 			children = (
+				7AB3CD83291909770001415F /* Extension */,
+				7AB3CD822919096C0001415F /* ViewController */,
 				7AB3CD662918F5EF0001415F /* AppDelegate.swift */,
 				7AB3CD682918F5EF0001415F /* SceneDelegate.swift */,
-				7AB3CD6A2918F5EF0001415F /* HomeViewController.swift */,
-				7AB3CD7A2918F7BF0001415F /* PayViewController.swift */,
-				7AB3CD7C2918F7C50001415F /* OrderViewController.swift */,
-				7AB3CD7E2918F7CA0001415F /* ShopViewController.swift */,
-				7AB3CD802918F7D40001415F /* OtherViewController.swift */,
 				7AB3CD6C2918F5EF0001415F /* Main.storyboard */,
 				7AB3CD6F2918F5F00001415F /* Assets.xcassets */,
 				7AB3CD712918F5F00001415F /* LaunchScreen.storyboard */,
 				7AB3CD742918F5F00001415F /* Info.plist */,
 			);
 			path = StarBucks;
+			sourceTree = "<group>";
+		};
+		7AB3CD822919096C0001415F /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7AB3CD6A2918F5EF0001415F /* HomeViewController.swift */,
+				7AB3CD7A2918F7BF0001415F /* PayViewController.swift */,
+				7AB3CD7C2918F7C50001415F /* OrderViewController.swift */,
+				7AB3CD7E2918F7CA0001415F /* ShopViewController.swift */,
+				7AB3CD802918F7D40001415F /* OtherViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		7AB3CD83291909770001415F /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				7AB3CD84291909FE0001415F /* UIView.swift */,
+				7AB3CD8629190A190001415F /* UIColor.swift */,
+				7AB3CD8829190D070001415F /* CALayer.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,13 +243,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AB3CD85291909FE0001415F /* UIView.swift in Sources */,
 				7AB3CD6B2918F5EF0001415F /* HomeViewController.swift in Sources */,
 				7AB3CD7D2918F7C50001415F /* OrderViewController.swift in Sources */,
 				7AB3CD812918F7D40001415F /* OtherViewController.swift in Sources */,
+				7AB3CD8729190A190001415F /* UIColor.swift in Sources */,
 				7AB3CD7F2918F7CA0001415F /* ShopViewController.swift in Sources */,
 				7AB3CD672918F5EF0001415F /* AppDelegate.swift in Sources */,
 				7AB3CD692918F5EF0001415F /* SceneDelegate.swift in Sources */,
 				7AB3CD7B2918F7BF0001415F /* PayViewController.swift in Sources */,
+				7AB3CD8929190D070001415F /* CALayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
