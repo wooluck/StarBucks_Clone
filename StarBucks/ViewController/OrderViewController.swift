@@ -17,10 +17,12 @@ class OrderViewController: UIViewController {
         $0.layer.shadowRadius = 0.8
         $0.layer.shadowOffset = CGSize(width: 0, height: 2)
         $0.layer.masksToBounds = false
-        
-        $0.titleConfigure(titles: ["전체 메뉴", "나만의 메뉴"])
+        $0.titleConfigure(titles: ["    전체 메뉴    ", "    나만의 메뉴    "])
     }
-
+    
+//    private lazy var cakeReservation = UIButton().then {
+//
+//    }
 
     // MARK: - viewDidAppear()
     override func viewDidAppear(_ animated: Bool) {
@@ -59,22 +61,20 @@ extension OrderViewController {
             $0.height.equalTo(50)
         }
     }
-    
 }
 
 // MARK: - class titleMenusView
 final class titleMenusView: UIView {
-//    var didTap: ((Int, String) -> ())?
-    
     private lazy var titleStackView = UIStackView().then {
-        $0.spacing = 20
-        $0.alignment = .leading
+//        $0.spacing = 20
+        $0.alignment = .center
     }
     
     private lazy var barView = UIView().then {
         $0.backgroundColor = UIColor(r: 47, g: 134, b: 80)
     }
     
+    // MARK: - init()
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -88,17 +88,17 @@ final class titleMenusView: UIView {
         addSubviews([titleStackView, barView])
         
         titleStackView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.equalToSuperview()
+            $0.bottom.equalToSuperview()
         }
         
         barView.snp.makeConstraints {
             $0.leading.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.height.equalTo(8)
+            $0.height.equalTo(4)
             $0.width.equalTo(0)
         }
     }
-    
     
     func titleConfigure(titles: [String]) {
         titles.enumerated().forEach { (i, title) in
@@ -121,11 +121,13 @@ final class titleMenusView: UIView {
     }
     
     @objc private func handleTap(_ sender: UIButton) {
-        print("sender : \(sender)")
         barView.snp.updateConstraints {
             $0.leading.equalTo(sender.frame.origin.x)
             $0.width.equalTo(sender.bounds.width)
         }
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
+            self.layoutIfNeeded()
+        }, completion: nil)
     }
-
 }
