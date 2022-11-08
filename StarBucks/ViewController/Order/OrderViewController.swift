@@ -10,6 +10,7 @@ import Then
 import SnapKit
 
 class OrderViewController: UIViewController {
+    
     private lazy var titleMenu = titleMenusView().then {
         $0.backgroundColor = .white
         $0.layer.shadowOpacity = 1
@@ -34,7 +35,11 @@ class OrderViewController: UIViewController {
     
     private lazy var subTitleMenu = subTitleMenusView()
 
-    private lazy var tableView = UITableView()
+    private lazy var tableView = UITableView().then {
+        $0.register(OrderTableViewCell.self, forCellReuseIdentifier: "OrderTableViewCell")
+    }
+    
+    private lazy var selectStore = selectStoreView()
 
 
     // MARK: - viewDidAppear()
@@ -52,6 +57,7 @@ class OrderViewController: UIViewController {
         view.backgroundColor = .white
         setupNav()
         setupView()
+        bindTableView()
     }
 }
 
@@ -67,7 +73,11 @@ extension OrderViewController {
     }
     
     private func setupView() {
-        view.addSubviews([titleMenu, cakeReservation, subTitleMenu])
+        view.addSubviews([titleMenu,
+                          cakeReservation,
+                          subTitleMenu,
+                          tableView,
+                          selectStore])
         
         titleMenu.snp.makeConstraints {
             $0.top.equalTo(self.view.safeAreaLayoutGuide)
@@ -78,7 +88,6 @@ extension OrderViewController {
         cakeReservation.snp.makeConstraints {
             $0.top.equalTo(titleMenu.snp.top).inset(10)
             $0.trailing.equalToSuperview().inset(20)
-//            $0.height.equalTo(30)
         }
         
         subTitleMenu.snp.makeConstraints {
@@ -86,8 +95,30 @@ extension OrderViewController {
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(55)
         }
+        
+        tableView.snp.makeConstraints {
+            $0.top.equalTo(subTitleMenu.snp.bottom)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
+        }
+        
+        selectStore.snp.makeConstraints {
+            $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
+            $0.height.equalTo(65)
+        }
+    }
+    
+    private func bindTableView(){
+        
     }
 }
+
+
+
+
 
 // MARK: - class titleMenusView
 final class titleMenusView: UIView {
@@ -110,7 +141,8 @@ final class titleMenusView: UIView {
     }
     
     private func setupView() {
-        addSubviews([titleStackView, barView])
+        addSubviews([titleStackView,
+                     barView])
         
         titleStackView.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -146,7 +178,6 @@ final class titleMenusView: UIView {
     }
     
     @objc private func handleTap(_ sender: UIButton) {
-        print("sender : \(sender)")
         barView.snp.updateConstraints {
             $0.leading.equalTo(sender.frame.origin.x)
             $0.width.equalTo(sender.bounds.width)
@@ -211,7 +242,13 @@ final class subTitleMenusView: UIView {
     }
     
     private func setupView() {
-        addSubviews([beverageBtn, newLabel, foodBtn, newLabelTwo, MDBtn, newLabelThree])
+        addSubviews([beverageBtn,
+                     newLabel,
+                     foodBtn,
+                     newLabelTwo,
+                     MDBtn,
+                     newLabelThree])
+        
         beverageBtn.snp.makeConstraints {
             $0.top.equalToSuperview().offset(10)
             $0.leading.equalToSuperview().offset(25)
@@ -241,6 +278,82 @@ final class subTitleMenusView: UIView {
             $0.top.equalTo(MDBtn.snp.top).inset(8)
             $0.leading.equalTo(MDBtn.snp.trailing)
         }
+    }
+}
+
+// MARK: - class selectStoreView
+final class selectStoreView: UIView {
+    
+    private lazy var selectStoreBtn = UIButton().then {
+        $0.setTitle("주문할 매장을 선택해 주세요", for: .normal)
+        $0.setImage(.init(systemName: "arrow.turn.right.down"), for: .normal)
+        $0.tintColor = .white
+        $0.setTitleColor(.white, for: .normal)
+        $0.imageView?.contentMode = .scaleAspectFit
+        $0.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        $0.contentHorizontalAlignment = .leading
+        $0.imageEdgeInsets = .init(top: 0, left: 250, bottom: 0, right: 00)
+//        $0.backgroundColor = .blue
+    }
+    
+    private lazy var seperateLine = UIView().then {
+        $0.backgroundColor = .gray
+    }
+    
+    private lazy var heartBtn = UIButton().then {
+        $0.setImage(.init(systemName: "heart"), for: .normal)
+        $0.tintColor = .white
+        $0.imageView?.contentMode = .scaleAspectFit
+//        $0.imageView.
+//        $0.backgroundColor = .blue
+    }
+    
+    private lazy var heartLabel = UILabel().then {
+        $0.text = "0"
+        $0.textColor = .white
+    }
+    
+    // MARK: - init()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupView() {
+        
+        backgroundColor = UIColor(r: 74, g: 74, b: 74)
+        
+        addSubviews([selectStoreBtn, seperateLine, heartBtn, heartLabel])
+        
+        selectStoreBtn.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(10)
+            $0.leading.equalToSuperview().inset(10)
+            $0.width.equalTo(275)
+            $0.height.equalTo(45)
+        }
+        
+        seperateLine.snp.makeConstraints {
+            $0.top.equalTo(selectStoreBtn.snp.bottom).inset(5)
+            $0.leading.equalTo(selectStoreBtn.snp.leading).inset(5)
+            $0.trailing.equalTo(selectStoreBtn.snp.trailing)
+            $0.height.equalTo(1)
+        }
+        
+        heartBtn.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.trailing.equalToSuperview()
+            $0.width.height.equalTo(100)
+        }
+        
+//        heartLabel.snp.makeConstraints {
+//            $0.centerX.centerY.equalTo(heartBtn)
+//        }
+        
+        
     }
     
 }

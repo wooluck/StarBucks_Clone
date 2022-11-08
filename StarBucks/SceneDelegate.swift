@@ -35,19 +35,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             items[1].selectedImage = UIImage(systemName: "creditcard.fill")
             items[1].image = UIImage(systemName: "creditcard")
-            items[1].title = "Home"
+            items[1].title = "Pay"
             
             items[2].selectedImage = UIImage(systemName: "dollarsign.circle.fill")
             items[2].image = UIImage(systemName: "dollarsign.circle")
-            items[2].title = "Home"
+            items[2].title = "Order"
             
             items[3].selectedImage = UIImage(systemName: "takeoutbag.and.cup.and.straw.fill")
             items[3].image = UIImage(systemName: "takeoutbag.and.cup.and.straw")
-            items[3].title = "Home"
+            items[3].title = "Shop"
             
 //            items[4].selectedImage = UIImage(systemName: "ellipsis")
             items[4].image = UIImage(systemName: "ellipsis")
-            items[4].title = "Home"
+            items[4].title = "Other"
         }
         
         window?.rootViewController = tabBarController
