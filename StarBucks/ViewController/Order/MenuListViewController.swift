@@ -10,6 +10,11 @@ import UIKit
 
 class MenuListViewController: UIViewController {
     
+    private lazy var tableView = UITableView().then {
+        $0.register(OrderTableViewCell.self, forCellReuseIdentifier: "MenuListTableViewCell")
+        $0.backgroundColor = .white
+    }
+    
     
     // MARK: - viewDidLoad()
     override func viewDidLoad() {

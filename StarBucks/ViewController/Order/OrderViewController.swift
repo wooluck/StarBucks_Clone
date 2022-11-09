@@ -122,9 +122,9 @@ extension OrderViewController: PageboyViewControllerDataSource, TMBarDataSource 
         // tab 안에 글씨 들
         switch index {
         case 0:
-            return TMBarItem(title: "전체 메뉴")
+            return TMBarItem(title: " 전체 메뉴 ")
         case 1:
-            return TMBarItem(title: "나만의 메뉴")
+            return TMBarItem(title: " 나만의 메뉴 ")
         default:
             return TMBarItem(title: "전체 메뉴")
         }

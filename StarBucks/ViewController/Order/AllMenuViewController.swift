@@ -13,11 +13,6 @@ class AllMenuViewController: UIViewController {
     
     private lazy var shadowLine = UIView().then {
         $0.backgroundColor = .systemGray3
-//        $0.layer.shadowOpacity = 1
-//        $0.layer.shadowColor = UIColor.systemGray3.cgColor
-//        $0.layer.shadowRadius = 0.8
-//        $0.layer.shadowOffset = CGSize(width: 0, height: 2)
-//        $0.layer.masksToBounds = false
     }
     
     private lazy var tableView = UITableView().then {
@@ -25,25 +20,9 @@ class AllMenuViewController: UIViewController {
         $0.backgroundColor = .white
     }
     
-//    // MARK: - viewWillAppear()
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//
-//        // viewDidAppear 에서만 되고 위에 titleMenus에 바로 속성 적용하면 안됨.
-//        subTitleMenu.layer.addBorder([.bottom], color: .systemGray3, width: 1)
-//    }
-//
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//
-//        // viewDidAppear 에서만 되고 위에 titleMenus에 바로 속성 적용하면 안됨.
-//        subTitleMenu.layer.addBorder([.bottom], color: .systemGray3, width: 1)
-//    }
-    
     // MARK: - viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.backgroundColor = .purple
         setupView()
         
     }
@@ -75,12 +54,11 @@ extension AllMenuViewController {
     }
 }
 
-
 // MARK: - clase subTitleMenusView
 final class subTitleMenusView: UIView {
     private lazy var beverageBtn = UIButton().then {
         $0.setTitle("음료", for: .normal)
-        $0.setTitleColor(.gray, for: .normal)
+        $0.setTitleColor(.black, for: .normal)
         $0.titleLabel?.font = .boldSystemFont(ofSize: 18)
         $0.contentHorizontalAlignment = .center
     }
@@ -116,7 +94,6 @@ final class subTitleMenusView: UIView {
         $0.textColor = UIColor(r: 47, g: 134, b: 80)
         $0.font = .systemFont(ofSize: 10, weight: .bold)
     }
-    
     
     // MARK: - init()
     override init(frame: CGRect) {
