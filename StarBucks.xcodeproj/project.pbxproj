@@ -10,6 +10,7 @@
 		7A1252DF291B73AA0087656B /* MenuListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1252DE291B73AA0087656B /* MenuListViewController.swift */; };
 		7A1252E1291B7D900087656B /* MenuListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1252E0291B7D900087656B /* MenuListTableViewCell.swift */; };
 		7A1252E3291B856A0087656B /* MyMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1252E2291B856A0087656B /* MyMenuTableViewCell.swift */; };
+		7A1252E5291BA1930087656B /* MenuSequenceChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1252E4291BA1930087656B /* MenuSequenceChangeViewController.swift */; };
 		7AB3CD672918F5EF0001415F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD662918F5EF0001415F /* AppDelegate.swift */; };
 		7AB3CD692918F5EF0001415F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD682918F5EF0001415F /* SceneDelegate.swift */; };
 		7AB3CD6B2918F5EF0001415F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD6A2918F5EF0001415F /* HomeViewController.swift */; };
@@ -34,6 +35,7 @@
 		7A1252DE291B73AA0087656B /* MenuListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuListViewController.swift; sourceTree = "<group>"; };
 		7A1252E0291B7D900087656B /* MenuListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuListTableViewCell.swift; sourceTree = "<group>"; };
 		7A1252E2291B856A0087656B /* MyMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMenuTableViewCell.swift; sourceTree = "<group>"; };
+		7A1252E4291BA1930087656B /* MenuSequenceChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSequenceChangeViewController.swift; sourceTree = "<group>"; };
 		7AB1500B4BBF580FA724E1AF /* Pods_StarBucks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StarBucks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AB3CD632918F5EF0001415F /* StarBucks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarBucks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AB3CD662918F5EF0001415F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				7AB3CD8F291A20740001415F /* AllMenuTableViewCell.swift */,
 				7AB3CD8D291A12570001415F /* MyMenuViewController.swift */,
 				7A1252E2291B856A0087656B /* MyMenuTableViewCell.swift */,
+				7A1252E4291BA1930087656B /* MenuSequenceChangeViewController.swift */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				7AB3CD6B2918F5EF0001415F /* HomeViewController.swift in Sources */,
 				7AB3CD97291A395F0001415F /* Menu.swift in Sources */,
 				7AB3CD7D2918F7C50001415F /* OrderViewController.swift in Sources */,
+				7A1252E5291BA1930087656B /* MenuSequenceChangeViewController.swift in Sources */,
 				7AB3CD8E291A12570001415F /* MyMenuViewController.swift in Sources */,
 				7AB3CD812918F7D40001415F /* OtherViewController.swift in Sources */,
 				7AB3CD8729190A190001415F /* UIColor.swift in Sources */,

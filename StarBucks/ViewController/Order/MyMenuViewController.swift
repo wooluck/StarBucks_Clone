@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+// 나만의 메뉴 눌렀을 시 나오는 화면 
 class MyMenuViewController: UIViewController {
     
     private lazy var orderWithSwitchView = OrderWithSwitchView()
@@ -22,6 +23,15 @@ class MyMenuViewController: UIViewController {
         super.viewDidLoad()
 //        view.backgroundColor = .systemGray2
         setupLayout()
+        
+        orderWithSwitchView.sequenceChange.rx.tap
+            .bind {
+//                self.navigationController?.present(MenuSequenceChangeViewController(), animated: true, completion: nil)
+                let vc = MenuSequenceChangeViewController()
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true, completion: nil)
+
+            }.disposed(by: rx.disposeBag)
     }
 }
 
@@ -56,7 +66,7 @@ final class OrderWithSwitchView: UIView {
         $0.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
     }
     
-    private lazy var orderChange = UIButton().then {
+    lazy var sequenceChange = UIButton().then {
         $0.setTitle("순서변경", for: .normal)
         $0.setImage(.init(systemName: "arrow.up.arrow.down"), for: .normal)
         $0.tintColor = UIColor.gray
@@ -74,7 +84,7 @@ final class OrderWithSwitchView: UIView {
         setupView()
         backgroundColor = .systemGray6
         
-        orderChange.rx.tap
+        sequenceChange.rx.tap
             .bind {
                 print("orderChange _ Clicked")
             }.disposed(by: rx.disposeBag)
@@ -87,7 +97,7 @@ final class OrderWithSwitchView: UIView {
     private func setupView() {
         addSubviews([homeOrderLabel,
                     orderSwitch,
-                    orderChange])
+                    sequenceChange])
         
         homeOrderLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(20)
@@ -99,7 +109,7 @@ final class OrderWithSwitchView: UIView {
             $0.leading.equalTo(homeOrderLabel.snp.trailing)
         }
         
-        orderChange.snp.makeConstraints {
+        sequenceChange.snp.makeConstraints {
             $0.top.equalToSuperview().inset(18)
             $0.trailing.equalToSuperview().inset(25)
         }

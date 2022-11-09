@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+// NEW, 추천 ..등등 메뉴리스트 눌렀을 때 나오는 리스트 화면 
 // 홀케이크 예약도 레이아웃이 동일해서 같이 쓰일 예정 
 class MenuListViewController: UIViewController {
     

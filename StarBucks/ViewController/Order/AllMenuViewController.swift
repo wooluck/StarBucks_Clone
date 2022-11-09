@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+// 전체메뉴 버튼 눌렀을 시 나오는 화면 
 class AllMenuViewController: UIViewController {
     private lazy var subTitleMenu = subTitleMenusView()
     
