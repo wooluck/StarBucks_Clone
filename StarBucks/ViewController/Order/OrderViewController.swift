@@ -8,18 +8,15 @@
 import UIKit
 import Then
 import SnapKit
+import Parchment
+import Tabman
+import Pageboy
+import RxCocoa
+import RxSwift
 
-class OrderViewController: UIViewController {
-    
-    private lazy var titleMenu = titleMenusView().then {
-        $0.backgroundColor = .white
-        $0.layer.shadowOpacity = 1
-        $0.layer.shadowColor = UIColor.systemGray3.cgColor
-        $0.layer.shadowRadius = 0.8
-        $0.layer.shadowOffset = CGSize(width: 0, height: 2)
-        $0.layer.masksToBounds = false
-        $0.titleConfigure(titles: ["    전체 메뉴    ", "    나만의 메뉴    "])
-    }
+
+class OrderViewController: TabmanViewController {
+    var viewControllers: Array<UIViewController> = [AllMenuViewController(), MyMenuViewController()]
     
     private lazy var cakeReservation = UIButton().then {
         $0.setTitle("홀케이크 예약", for: .normal)
@@ -33,22 +30,21 @@ class OrderViewController: UIViewController {
         $0.imageEdgeInsets = .init(top: 0, left: -10, bottom: 0, right: 0)
     }
     
-    private lazy var subTitleMenu = subTitleMenusView()
-
-    private lazy var tableView = UITableView().then {
-        $0.register(OrderTableViewCell.self, forCellReuseIdentifier: "OrderTableViewCell")
+    private lazy var shadowLine = UIView().then {
+        $0.backgroundColor = .gray
+        $0.layer.shadowOpacity = 1
+        $0.layer.shadowColor = UIColor.systemGray3.cgColor
+        $0.layer.shadowRadius = 0.8
+        $0.layer.shadowOffset = CGSize(width: 0, height: 2)
+        $0.layer.masksToBounds = false
     }
     
     private lazy var selectStore = selectStoreView()
-
-
+    
     // MARK: - viewDidAppear()
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        // viewDidAppear 에서만 되고 위에 titleMenus에 바로 속성 적용하면 안됨.
-        titleMenu.layer.addBorder([.bottom], color: .gray, width: 1.0)
-        subTitleMenu.layer.addBorder([.bottom], color: .systemGray3, width: 1)
     }
     
     // MARK: - viewDidLoad()
@@ -58,6 +54,8 @@ class OrderViewController: UIViewController {
         setupNav()
         setupView()
         bindTableView()
+        bindView()
+        tabManSet()
     }
 }
 
@@ -68,39 +66,24 @@ extension OrderViewController {
         navigationItem.title = "Order"
         
         let magnifyingglassBtn = UIBarButtonItem(image: .init(systemName: "magnifyingglass"), style: .plain, target: self, action: nil)
-        magnifyingglassBtn.tintColor = .gray
+        magnifyingglassBtn.tintColor = UIColor(r: 83, g: 83, b: 83)
         self.navigationItem.rightBarButtonItem = magnifyingglassBtn
     }
     
     private func setupView() {
-        view.addSubviews([titleMenu,
-                          cakeReservation,
-                          subTitleMenu,
-                          tableView,
+        view.addSubviews([cakeReservation,
+                          shadowLine,
                           selectStore])
         
-        titleMenu.snp.makeConstraints {
-            $0.top.equalTo(self.view.safeAreaLayoutGuide)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(45)
-        }
-        
         cakeReservation.snp.makeConstraints {
-            $0.top.equalTo(titleMenu.snp.top).inset(10)
+            $0.top.equalTo(self.view.safeAreaLayoutGuide).inset(10)
             $0.trailing.equalToSuperview().inset(20)
         }
         
-        subTitleMenu.snp.makeConstraints {
-            $0.top.equalTo(titleMenu.snp.bottom)
+        shadowLine.snp.makeConstraints {
+            $0.top.equalTo(cakeReservation.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(55)
-        }
-        
-        tableView.snp.makeConstraints {
-            $0.top.equalTo(subTitleMenu.snp.bottom)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
+            $0.height.equalTo(1)
         }
         
         selectStore.snp.makeConstraints {
@@ -114,170 +97,75 @@ extension OrderViewController {
     private func bindTableView(){
         
     }
-}
-
-
-
-
-
-// MARK: - class titleMenusView
-final class titleMenusView: UIView {
-    private lazy var titleStackView = UIStackView().then {
-        $0.alignment = .center
+    
+    private func bindView() {
+        self.cakeReservation.rx.tap
+            .bind {
+                self.navigationController?.pushViewController(MenuListViewController(), animated: true)
+            }
+            
     }
     
-    private lazy var barView = UIView().then {
-        $0.backgroundColor = UIColor(r: 47, g: 134, b: 80)
-    }
-    
-    // MARK: - init()
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupView()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setupView() {
-        addSubviews([titleStackView,
-                     barView])
+    private func tabManSet() {
+        self.dataSource = self
         
-        titleStackView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.bottom.equalToSuperview()
-        }
-        
-        barView.snp.makeConstraints {
-            $0.leading.equalToSuperview()
-            $0.bottom.equalToSuperview()
-            $0.height.equalTo(4)
-            $0.width.equalTo(0)
-        }
-    }
-    
-    func titleConfigure(titles: [String]) {
-        titles.enumerated().forEach { (i, title) in
-            titleStackView.addArrangedSubview(createButton(title: title, tag: i))
-        }
-        layoutIfNeeded()
-        
-        if titleStackView.arrangedSubviews.count > 0,
-           let first = titleStackView.arrangedSubviews.first as? UIButton {
-            handleTap(first)
-        }
-    }
-    
-    private func createButton(title: String, tag: Int) -> UIButton {
-        let button = UIButton()
-        button.setTitle(title, for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.addTarget(self, action: #selector(handleTap), for: .touchUpInside)
-        return button
-    }
-    
-    @objc private func handleTap(_ sender: UIButton) {
-        barView.snp.updateConstraints {
-            $0.leading.equalTo(sender.frame.origin.x)
-            $0.width.equalTo(sender.bounds.width)
-        }
-        
-        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
-            self.layoutIfNeeded()
-        }, completion: nil)
+        // create Bar
+        let bar = TMBar.ButtonBar()
+        settingTabBar(setBar: bar)
+        addBar(bar, dataSource: self, at: .top)
     }
 }
 
-// MARK: - clase subTitleMenusView
-final class subTitleMenusView: UIView {
-    private lazy var beverageBtn = UIButton().then {
-        $0.setTitle("음료", for: .normal)
-        $0.setTitleColor(.gray, for: .normal)
-        $0.titleLabel?.font = .boldSystemFont(ofSize: 18)
-        $0.contentHorizontalAlignment = .center
+// MARK: - Pageboy, TabMan DataSource
+extension OrderViewController: PageboyViewControllerDataSource, TMBarDataSource {
+    func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
+        // tab 안에 글씨 들
+        switch index {
+        case 0:
+            return TMBarItem(title: "전체 메뉴")
+        case 1:
+            return TMBarItem(title: "나만의 메뉴")
+        default:
+            return TMBarItem(title: "전체 메뉴")
+        }
     }
     
-    private lazy var newLabel = UILabel().then {
-        $0.text = "New"
-        $0.textColor = UIColor(r: 47, g: 134, b: 80)
-        $0.font = .systemFont(ofSize: 10, weight: .bold)
+    func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
+        //위에서 선언한 vc array의 count를 반환
+        return viewControllers.count
     }
     
-    private lazy var foodBtn = UIButton().then {
-        $0.setTitle("푸드", for: .normal)
-        $0.setTitleColor(.gray, for: .normal)
-        $0.titleLabel?.font = .boldSystemFont(ofSize: 18)
-        $0.contentHorizontalAlignment = .center
+    func viewController(for pageboyViewController: PageboyViewController, at index: PageboyViewController.PageIndex) -> UIViewController? {
+        return viewControllers[index]
     }
     
-    private lazy var newLabelTwo = UILabel().then {
-        $0.text = "New"
-        $0.textColor = UIColor(r: 47, g: 134, b: 80)
-        $0.font = .systemFont(ofSize: 10, weight: .bold)
+    func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
+        return nil
     }
     
-    private lazy var MDBtn = UIButton().then {
-        $0.setTitle("상품", for: .normal)
-        $0.setTitleColor(.gray, for: .normal)
-        $0.titleLabel?.font = .boldSystemFont(ofSize: 18)
-        $0.contentHorizontalAlignment = .center
-    }
-    
-    private lazy var newLabelThree = UILabel().then {
-        $0.text = "New"
-        $0.textColor = UIColor(r: 47, g: 134, b: 80)
-        $0.font = .systemFont(ofSize: 10, weight: .bold)
-    }
-    
-    
-    // MARK: - init()
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupView()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setupView() {
-        addSubviews([beverageBtn,
-                     newLabel,
-                     foodBtn,
-                     newLabelTwo,
-                     MDBtn,
-                     newLabelThree])
+    func settingTabBar(setBar: TMBar.ButtonBar) {
+        setBar.layout.transitionStyle = .snap
         
-        beverageBtn.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(10)
-            $0.leading.equalToSuperview().offset(25)
+        // 왼쪽 여백
+        setBar.layout.contentInset = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 20.0)
+        
+        setBar.layout.interButtonSpacing = 30
+        
+        setBar.backgroundView.style = .clear
+        
+        // 선택 / 안선택 색 + font size
+        setBar.buttons.customize { (button) in
+            button.tintColor = .gray
+            button.selectedTintColor = .black
+            button.font = .systemFont(ofSize: 18, weight: .bold)
+            button.selectedFont = .systemFont(ofSize: 18, weight: .medium)
         }
         
-        newLabel.snp.makeConstraints {
-            $0.top.equalTo(beverageBtn.snp.top).inset(8)
-            $0.leading.equalTo(beverageBtn.snp.trailing)
-        }
+        // 인디케이터
+        setBar.indicator.weight = .custom(value: 3)
+        setBar.indicator.tintColor = UIColor(r: 47, g: 134, b: 80)
+//        setBar.indicator
         
-        foodBtn.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(10)
-            $0.leading.equalTo(newLabel.snp.trailing).offset(15)
-        }
-        
-        newLabelTwo.snp.makeConstraints {
-            $0.top.equalTo(foodBtn.snp.top).inset(8)
-            $0.leading.equalTo(foodBtn.snp.trailing)
-        }
-        
-        MDBtn.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(10)
-            $0.leading.equalTo(newLabelTwo.snp.trailing).offset(15)
-        }
-        
-        newLabelThree.snp.makeConstraints {
-            $0.top.equalTo(MDBtn.snp.top).inset(8)
-            $0.leading.equalTo(MDBtn.snp.trailing)
-        }
     }
 }
 
@@ -293,24 +181,22 @@ final class selectStoreView: UIView {
         $0.titleLabel?.font = .boldSystemFont(ofSize: 16)
         $0.contentHorizontalAlignment = .leading
         $0.imageEdgeInsets = .init(top: 0, left: 250, bottom: 0, right: 00)
-//        $0.backgroundColor = .blue
     }
     
     private lazy var seperateLine = UIView().then {
         $0.backgroundColor = .gray
     }
     
-    private lazy var heartBtn = UIButton().then {
-        $0.setImage(.init(systemName: "heart"), for: .normal)
+    private lazy var bagBtn = UIButton().then {
+        $0.setImage(.init(systemName: "bag", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40, weight: .regular, scale: .default)), for: .normal)
         $0.tintColor = .white
         $0.imageView?.contentMode = .scaleAspectFit
-//        $0.imageView.
-//        $0.backgroundColor = .blue
     }
     
-    private lazy var heartLabel = UILabel().then {
+    private lazy var bagLabel = UILabel().then {
         $0.text = "0"
         $0.textColor = .white
+        $0.font = .systemFont(ofSize: 16, weight: .bold)
     }
     
     // MARK: - init()
@@ -323,11 +209,12 @@ final class selectStoreView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - function
     private func setupView() {
         
         backgroundColor = UIColor(r: 74, g: 74, b: 74)
         
-        addSubviews([selectStoreBtn, seperateLine, heartBtn, heartLabel])
+        addSubviews([selectStoreBtn, seperateLine, bagBtn, bagLabel])
         
         selectStoreBtn.snp.makeConstraints {
             $0.top.equalToSuperview().inset(10)
@@ -343,17 +230,14 @@ final class selectStoreView: UIView {
             $0.height.equalTo(1)
         }
         
-        heartBtn.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.trailing.equalToSuperview()
-            $0.width.height.equalTo(100)
+        bagBtn.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(10)
+            $0.trailing.equalToSuperview().inset(10)
         }
         
-//        heartLabel.snp.makeConstraints {
-//            $0.centerX.centerY.equalTo(heartBtn)
-//        }
-        
-        
+        bagLabel.snp.makeConstraints {
+            $0.centerX.equalTo(bagBtn)
+            $0.top.equalTo(bagBtn.snp.top).inset(16)
+        }
     }
-    
 }

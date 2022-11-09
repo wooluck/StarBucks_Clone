@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A1252DF291B73AA0087656B /* MenuListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1252DE291B73AA0087656B /* MenuListViewController.swift */; };
 		7AB3CD672918F5EF0001415F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD662918F5EF0001415F /* AppDelegate.swift */; };
 		7AB3CD692918F5EF0001415F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD682918F5EF0001415F /* SceneDelegate.swift */; };
 		7AB3CD6B2918F5EF0001415F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD6A2918F5EF0001415F /* HomeViewController.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7A1252DE291B73AA0087656B /* MenuListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuListViewController.swift; sourceTree = "<group>"; };
 		7AB1500B4BBF580FA724E1AF /* Pods_StarBucks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StarBucks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AB3CD632918F5EF0001415F /* StarBucks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarBucks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AB3CD662918F5EF0001415F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			children = (
 				7AB3CD7C2918F7C50001415F /* OrderViewController.swift */,
 				7AB3CD8F291A20740001415F /* OrderTableViewCell.swift */,
+				7A1252DE291B73AA0087656B /* MenuListViewController.swift */,
 				7AB3CD8B291A124C0001415F /* AllMenuViewController.swift */,
 				7AB3CD8D291A12570001415F /* MyMenuViewController.swift */,
 			);
@@ -312,6 +315,7 @@
 				7AB3CD8729190A190001415F /* UIColor.swift in Sources */,
 				7AB3CD8C291A124C0001415F /* AllMenuViewController.swift in Sources */,
 				7AB3CD7F2918F7CA0001415F /* ShopViewController.swift in Sources */,
+				7A1252DF291B73AA0087656B /* MenuListViewController.swift in Sources */,
 				7AB3CD672918F5EF0001415F /* AppDelegate.swift in Sources */,
 				7AB3CD692918F5EF0001415F /* SceneDelegate.swift in Sources */,
 				7AB3CD7B2918F7BF0001415F /* PayViewController.swift in Sources */,

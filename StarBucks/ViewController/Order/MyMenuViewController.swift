@@ -11,6 +11,6 @@ import UIKit
 class MyMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .brown
+        view.backgroundColor = .systemGray2
     }
 }
