@@ -13,9 +13,11 @@ import Tabman
 import Pageboy
 import RxCocoa
 import RxSwift
+import NSObject_Rx
 
 
 class OrderViewController: TabmanViewController {
+    
     var viewControllers: Array<UIViewController> = [AllMenuViewController(), MyMenuViewController()]
     
     private lazy var cakeReservation = UIButton().then {
@@ -102,7 +104,7 @@ extension OrderViewController {
         self.cakeReservation.rx.tap
             .bind {
                 self.navigationController?.pushViewController(MenuListViewController(), animated: true)
-            }
+            }.disposed(by: rx.disposeBag)
             
     }
     

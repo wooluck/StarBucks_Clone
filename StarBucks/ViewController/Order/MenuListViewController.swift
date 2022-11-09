@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+// 홀케이크 예약도 레이아웃이 동일해서 같이 쓰일 예정 
 class MenuListViewController: UIViewController {
     
     private lazy var tableView = UITableView().then {
