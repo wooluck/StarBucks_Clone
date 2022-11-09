@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class OrderTableViewCell: UITableViewCell {
+class AllMenuTableViewCell: UITableViewCell {
     
     private lazy var menuImage = UIImageView().then {
         $0.image = UIImage(named: "recommend")
@@ -37,7 +37,7 @@ class OrderTableViewCell: UITableViewCell {
         }
 }
 
-extension OrderTableViewCell {
+extension AllMenuTableViewCell {
     private func setupLayout() {
         addSubviews([menuImage, kindKRLabel, kindENGLabel])
         

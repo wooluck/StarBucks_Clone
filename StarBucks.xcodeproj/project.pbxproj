@@ -25,7 +25,7 @@
 		7AB3CD8929190D070001415F /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD8829190D070001415F /* CALayer.swift */; };
 		7AB3CD8C291A124C0001415F /* AllMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD8B291A124C0001415F /* AllMenuViewController.swift */; };
 		7AB3CD8E291A12570001415F /* MyMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD8D291A12570001415F /* MyMenuViewController.swift */; };
-		7AB3CD90291A20740001415F /* OrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD8F291A20740001415F /* OrderTableViewCell.swift */; };
+		7AB3CD90291A20740001415F /* AllMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD8F291A20740001415F /* AllMenuTableViewCell.swift */; };
 		7AB3CD97291A395F0001415F /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD96291A395F0001415F /* Menu.swift */; };
 		F30DC839C97BD978238C1EF3 /* Pods_StarBucks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB1500B4BBF580FA724E1AF /* Pods_StarBucks.framework */; };
 /* End PBXBuildFile section */
@@ -52,7 +52,7 @@
 		7AB3CD8829190D070001415F /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
 		7AB3CD8B291A124C0001415F /* AllMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMenuViewController.swift; sourceTree = "<group>"; };
 		7AB3CD8D291A12570001415F /* MyMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMenuViewController.swift; sourceTree = "<group>"; };
-		7AB3CD8F291A20740001415F /* OrderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderTableViewCell.swift; sourceTree = "<group>"; };
+		7AB3CD8F291A20740001415F /* AllMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMenuTableViewCell.swift; sourceTree = "<group>"; };
 		7AB3CD96291A395F0001415F /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		A2FA4B8515E4C0AC055C5A0C /* Pods-StarBucks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StarBucks.release.xcconfig"; path = "Target Support Files/Pods-StarBucks/Pods-StarBucks.release.xcconfig"; sourceTree = "<group>"; };
 		FC485EB63C0EBCA57BE4052E /* Pods-StarBucks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StarBucks.debug.xcconfig"; path = "Target Support Files/Pods-StarBucks/Pods-StarBucks.debug.xcconfig"; sourceTree = "<group>"; };
@@ -147,10 +147,10 @@
 			isa = PBXGroup;
 			children = (
 				7AB3CD7C2918F7C50001415F /* OrderViewController.swift */,
-				7AB3CD8F291A20740001415F /* OrderTableViewCell.swift */,
 				7A1252DE291B73AA0087656B /* MenuListViewController.swift */,
 				7A1252E0291B7D900087656B /* MenuListTableViewCell.swift */,
 				7AB3CD8B291A124C0001415F /* AllMenuViewController.swift */,
+				7AB3CD8F291A20740001415F /* AllMenuTableViewCell.swift */,
 				7AB3CD8D291A12570001415F /* MyMenuViewController.swift */,
 				7A1252E2291B856A0087656B /* MyMenuTableViewCell.swift */,
 			);
@@ -328,7 +328,7 @@
 				7AB3CD7B2918F7BF0001415F /* PayViewController.swift in Sources */,
 				7A1252E3291B856A0087656B /* MyMenuTableViewCell.swift in Sources */,
 				7AB3CD8929190D070001415F /* CALayer.swift in Sources */,
-				7AB3CD90291A20740001415F /* OrderTableViewCell.swift in Sources */,
+				7AB3CD90291A20740001415F /* AllMenuTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

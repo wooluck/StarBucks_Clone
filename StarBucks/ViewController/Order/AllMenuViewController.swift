@@ -16,20 +16,21 @@ class AllMenuViewController: UIViewController {
     }
     
     private lazy var tableView = UITableView().then {
-        $0.register(OrderTableViewCell.self, forCellReuseIdentifier: "OrderTableViewCell")
+        $0.register(AllMenuTableViewCell.self, forCellReuseIdentifier: "AllMenuTableViewCell")
         $0.backgroundColor = .white
     }
     
     // MARK: - viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
+        setupLayout()
         
     }
 }
 
+// MARK: - extension
 extension AllMenuViewController {
-    private func setupView() {
+    private func setupLayout() {
         view.addSubviews([subTitleMenu,
                           shadowLine,
                           tableView])
@@ -99,6 +100,11 @@ final class subTitleMenusView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+        
+        beverageBtn.rx.tap
+            .bind {
+                print("beverageBtn _ Clicked")
+            }.disposed(by: rx.disposeBag)
     }
     
     required init?(coder: NSCoder) {
