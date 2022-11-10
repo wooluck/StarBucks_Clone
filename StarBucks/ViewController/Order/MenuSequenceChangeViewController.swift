@@ -18,25 +18,25 @@ class MenuSequenceChangeViewController: UIViewController {
         $0.layer.shadowColor = UIColor.systemGray4.cgColor
         $0.layer.shadowOpacity = 0.5
         $0.layer.shadowRadius = 5
-//        $0.layer.shadowOffset = CGSize(width: 0, height: 0)
         $0.layer.masksToBounds = false
         $0.backgroundColor = .white
-        
     }
+
     
-    private lazy var btnStackView = UIStackView()
+    private lazy var popupView = AlertViewController().then {
+        $0.layer.shadowColor = UIColor.systemGray2.cgColor
+        $0.layer.shadowOpacity = 1
+        $0.layer.shadowRadius = 10
+        $0.layer.masksToBounds = false
+        $0.isHidden = true
+    }
     
     // MARK: - viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setupNav()
         setupLayout()
+        bindView()
         view.backgroundColor = .white
-        
-        navigationView.navCancelBtn.rx.tap
-            .bind {
-                self.dismiss(animated: true)
-            }.disposed(by: rx.disposeBag)
     }
 }
 
@@ -45,7 +45,8 @@ extension MenuSequenceChangeViewController {
     private func setupLayout() {
         view.addSubviews([navigationView,
                          contentView,
-                         btnView])
+                         btnView,
+                         popupView])
         
         navigationView.snp.makeConstraints {
             $0.top.equalTo(self.view.safeAreaLayoutGuide)
@@ -67,6 +68,29 @@ extension MenuSequenceChangeViewController {
             $0.trailing.equalToSuperview()
             $0.height.equalTo(70)
         }
+        
+        popupView.snp.makeConstraints {
+            $0.centerX.centerY.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.height.equalTo(150)
+        }
+    }
+    
+    private func bindView() {
+        navigationView.navCancelBtn.rx.tap
+            .bind {
+                self.popupView.isHidden = false
+            }.disposed(by: rx.disposeBag)
+        
+        btnView.cancelBtn.rx.tap
+            .bind {
+                self.popupView.isHidden = false
+            }.disposed(by: rx.disposeBag)
+        
+        popupView.cancelBtn.rx.tap
+            .bind {
+                self.dismiss(animated: true)
+            }.disposed(by: rx.disposeBag)
     }
 }
 
@@ -87,7 +111,11 @@ final class NavigationView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
-//        backgroundColor = .red
+//        navCancelBtn.rx.tap
+//            .bind {
+//                <#code#>
+//            }
+
         
     }
     
@@ -166,8 +194,6 @@ final class BtnView: UIView {
         $0.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
         $0.setTitleColor(.white, for: .normal)
         $0.backgroundColor = UIColor(r: 47, g: 134, b: 80)
-//        $0.layer.borderWidth = 1
-//        $0.layer.borderColor = UIColor(r: 47, g: 134, b: 80).cgColor
         $0.layer.cornerRadius = 20
     }
     
