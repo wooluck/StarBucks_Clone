@@ -14,7 +14,17 @@ class MenuSequenceChangeViewController: UIViewController {
     
     private lazy var contentView = ContentView()
     
-    private lazy var btnView = BtnView()
+    private lazy var btnView = BtnView().then {
+        $0.layer.shadowColor = UIColor.systemGray4.cgColor
+        $0.layer.shadowOpacity = 0.5
+        $0.layer.shadowRadius = 5
+//        $0.layer.shadowOffset = CGSize(width: 0, height: 0)
+        $0.layer.masksToBounds = false
+        $0.backgroundColor = .white
+        
+    }
+    
+    private lazy var btnStackView = UIStackView()
     
     // MARK: - viewDidLoad()
     override func viewDidLoad() {
@@ -41,7 +51,7 @@ extension MenuSequenceChangeViewController {
             $0.top.equalTo(self.view.safeAreaLayoutGuide)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
-            $0.height.equalTo(100)
+            $0.height.equalTo(60)
         }
         
         contentView.snp.makeConstraints {
@@ -55,7 +65,7 @@ extension MenuSequenceChangeViewController {
             $0.bottom.equalTo(self.view.safeAreaLayoutGuide)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
-            $0.height.equalTo(100)
+            $0.height.equalTo(70)
         }
     }
 }
@@ -65,17 +75,19 @@ extension MenuSequenceChangeViewController {
 final class NavigationView: UIView {
     private lazy var titleLabel = UILabel().then {
         $0.text = "나만의 메뉴 순서변경"
+        $0.font = .systemFont(ofSize: 14, weight: .bold)
     }
     
     lazy var navCancelBtn = UIButton().then {
-        $0.setImage(.init(systemName: "multiply"), for: .normal)
+        $0.setImage(.init(systemName: "multiply", withConfiguration: UIImage.SymbolConfiguration(pointSize: 22, weight: .regular, scale: .default)), for: .normal)
+        $0.tintColor = UIColor(r: 83, g: 83, b: 83)
     }
     
     // MARK: - init()
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
-        backgroundColor = .red
+//        backgroundColor = .red
         
     }
     
@@ -93,8 +105,8 @@ final class NavigationView: UIView {
         }
         
         navCancelBtn.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.trailing.equalToSuperview()
+            $0.top.equalToSuperview().inset(20)
+            $0.trailing.equalToSuperview().inset(20)
         }
     }
 }
@@ -102,9 +114,10 @@ final class NavigationView: UIView {
 
 // MARK: - class ContentView
 final class ContentView: UIView {
-    private lazy var tableView = UITableView().then {
-        $0.backgroundColor = .orange
-    }
+    private lazy var tableView = UITableView()
+//        .then {
+//        $0.backgroundColor = .orange
+//    }
     
     // MARK: - init()
     override init(frame: CGRect) {
@@ -131,16 +144,39 @@ final class ContentView: UIView {
 
 // MARK: - class BtnView
 final class BtnView: UIView {
-    private var cancelBtn = UIButton()
+    private var stackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.alignment = .fill
+        $0.distribution = .fillEqually
+        
+    }
     
-    private var changeBtn = UIButton()
+    lazy var cancelBtn = UIButton().then {
+        $0.setTitle("취소", for: .normal)
+        $0.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
+        $0.setTitleColor(UIColor(r: 47, g: 134, b: 80), for: .normal)
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor(r: 47, g: 134, b: 80).cgColor
+        $0.layer.cornerRadius = 20
+        
+    }
+    
+    private lazy var changeBtn = UIButton().then {
+        $0.setTitle("순서 변경하기", for: .normal)
+        $0.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
+        $0.setTitleColor(.white, for: .normal)
+        $0.backgroundColor = UIColor(r: 47, g: 134, b: 80)
+//        $0.layer.borderWidth = 1
+//        $0.layer.borderColor = UIColor(r: 47, g: 134, b: 80).cgColor
+        $0.layer.cornerRadius = 20
+    }
     
     // MARK: - init()
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
         
-        backgroundColor = .yellow
+//        backgroundColor = .yellow
     }
     
     required init?(coder: NSCoder) {
@@ -149,15 +185,19 @@ final class BtnView: UIView {
     
     private func setupLayout() {
         addSubviews([cancelBtn, changeBtn])
-        
+
         cancelBtn.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.leading.equalToSuperview()
+            $0.top.equalToSuperview().inset(15)
+            $0.leading.equalToSuperview().inset(20)
+            $0.width.equalTo(UIScreen.main.bounds.width / 2 - 30)
+            $0.height.equalTo(40)
         }
-        
+
         changeBtn.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.trailing.equalToSuperview()
+            $0.top.equalToSuperview().inset(15)
+            $0.trailing.equalToSuperview().inset(20)
+            $0.width.equalTo(UIScreen.main.bounds.width / 2 - 30)
+            $0.height.equalTo(40)
         }
     }
 }
