@@ -21,12 +21,10 @@ class MyMenuViewController: UIViewController {
     // MARK: - viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.backgroundColor = .systemGray2
         setupLayout()
         
         orderWithSwitchView.sequenceChange.rx.tap
             .bind {
-//                self.navigationController?.present(MenuSequenceChangeViewController(), animated: true, completion: nil)
                 let vc = MenuSequenceChangeViewController()
                 vc.modalPresentationStyle = .fullScreen
                 self.present(vc, animated: true, completion: nil)
