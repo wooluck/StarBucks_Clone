@@ -67,9 +67,13 @@ extension OrderViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Order"
         
-        let magnifyingglassBtn = UIBarButtonItem(image: .init(systemName: "magnifyingglass"), style: .plain, target: self, action: nil)
+        let magnifyingglassBtn = UIBarButtonItem(image: .init(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(searchBtnClick))
         magnifyingglassBtn.tintColor = UIColor(r: 83, g: 83, b: 83)
         self.navigationItem.rightBarButtonItem = magnifyingglassBtn
+    }
+    
+    @objc private func searchBtnClick() {
+        
     }
     
     private func setupView() {

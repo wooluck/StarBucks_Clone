@@ -87,7 +87,17 @@ extension MenuSequenceChangeViewController {
                 self.popupView.isHidden = false
             }.disposed(by: rx.disposeBag)
         
+        btnView.changeBtn.rx.tap
+            .bind {
+                self.dismiss(animated: true)
+            }.disposed(by: rx.disposeBag)
+        
         popupView.cancelBtn.rx.tap
+            .bind {
+                self.popupView.isHidden = true
+            }.disposed(by: rx.disposeBag)
+        
+        popupView.okBtn.rx.tap
             .bind {
                 self.dismiss(animated: true)
             }.disposed(by: rx.disposeBag)
@@ -189,7 +199,7 @@ final class BtnView: UIView {
         
     }
     
-    private lazy var changeBtn = UIButton().then {
+    lazy var changeBtn = UIButton().then {
         $0.setTitle("순서 변경하기", for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
         $0.setTitleColor(.white, for: .normal)
