@@ -72,7 +72,7 @@ extension MenuSequenceChangeViewController {
         popupView.snp.makeConstraints {
             $0.centerX.centerY.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(150)
+            $0.height.equalTo(170)
         }
     }
     
