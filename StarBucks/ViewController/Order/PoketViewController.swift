@@ -7,16 +7,20 @@
 
 import Foundation
 import UIKit
+import Tabman
+import Pageboy
 
-class PoketViewController: UIViewController {
+class PoketViewController: TabmanViewController {
+    
+    var viewControllers: Array<UIViewController> = [PoketFoodViewController(), PoketProductViewController()]
     
     private lazy var selectStoreView = SelectStoreView()
     
-    private lazy var selectFoodOrProduct = UIView()
+    private lazy var selectFoodOrProduct = SelectFoodOrProduct()
     
     private lazy var poketTableView = UITableView()
     
-    private lazy var emptyView = UIView()
+    private lazy var emptyView = EmptyView()
     
     
     // MARK: - viewDidLoad()
@@ -33,13 +37,11 @@ extension PoketViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "장바구니"
         
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(r: 74, g: 74, b: 74)
-        self.navigationController?.navigationBar.standardAppearance = appearance;
-        self.navigationController?.navigationBar.scrollEdgeAppearance = self.navigationController?.navigationBar.standardAppearance
-//        navigationItem.titleView?.backgroundColor = UIColor(r: 74, g: 74, b: 74)
-        
+//        let appearance = UINavigationBarAppearance()
+//        appearance.configureWithOpaqueBackground()
+//        appearance.backgroundColor = UIColor(r: 74, g: 74, b: 74)
+//        self.navigationController?.navigationBar.standardAppearance = appearance;
+//        self.navigationController?.navigationBar.scrollEdgeAppearance = self.navigationController?.navigationBar.standardAppearance        
     }
     
     private func setView() {
@@ -49,11 +51,18 @@ extension PoketViewController {
                          selectFoodOrProduct,
                          poketTableView, emptyView])
         
+        selectStoreView.snp.makeConstraints {
+            $0.top.equalTo(self.view.safeAreaLayoutGuide)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
+            $0.height.equalTo(65)
+        }
     }
+    
 }
 
 
-// MARK: - class
+// MARK: - class SelectStoreView
 
 class SelectStoreView: UIView {
     
@@ -65,7 +74,7 @@ class SelectStoreView: UIView {
         $0.imageView?.contentMode = .scaleAspectFit
         $0.titleLabel?.font = .boldSystemFont(ofSize: 16)
         $0.contentHorizontalAlignment = .leading
-        $0.imageEdgeInsets = .init(top: 0, left: 250, bottom: 0, right: 00)
+        $0.imageEdgeInsets = .init(top: 0, left: 340, bottom: 0, right: 00)
     }
     
     private lazy var seperateLine = UIView().then {
@@ -83,13 +92,30 @@ class SelectStoreView: UIView {
     }
     
     private func setupView() {
+        backgroundColor = UIColor(r: 74, g: 74, b: 74)
         
+        addSubviews([selectStoreBtn, seperateLine])
+        
+        selectStoreBtn.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.equalToSuperview().inset(10)
+            $0.trailing.equalToSuperview().inset(10)
+//            $0.width.equalTo(275)
+            $0.height.equalTo(45)
+        }
+        
+        seperateLine.snp.makeConstraints {
+            $0.top.equalTo(selectStoreBtn.snp.bottom).inset(5)
+            $0.leading.equalTo(selectStoreBtn.snp.leading).inset(10)
+            $0.trailing.equalTo(selectStoreBtn.snp.trailing).inset(10)
+            $0.height.equalTo(1)
+        }
     }
     
     
 }
 
-// MARK: - class
+// MARK: - class SelectFoodOrProduct
 class SelectFoodOrProduct: UIView {
     
     // MARK: - init()
@@ -105,10 +131,9 @@ class SelectFoodOrProduct: UIView {
     private func setupView() {
         
     }
-    
 }
 
-// MARK: - class
+// MARK: - class EmptyView
 class EmptyView: UIView {
     
     // MARK: - init()
