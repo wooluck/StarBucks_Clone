@@ -109,6 +109,11 @@ extension OrderViewController {
             .bind {
                 self.navigationController?.pushViewController(MenuListViewController(), animated: true)
             }.disposed(by: rx.disposeBag)
+        
+        self.selectStore.poketBtn.rx.tap
+            .bind {
+                self.navigationController?.pushViewController(PoketViewController(), animated: true)
+            }.disposed(by: rx.disposeBag)
             
     }
     
@@ -193,7 +198,7 @@ final class selectStoreView: UIView {
         $0.backgroundColor = .gray
     }
     
-    private lazy var bagBtn = UIButton().then {
+    lazy var poketBtn = UIButton().then {
         $0.setImage(.init(systemName: "bag", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40, weight: .regular, scale: .default)), for: .normal)
         $0.tintColor = .white
         $0.imageView?.contentMode = .scaleAspectFit
@@ -220,7 +225,7 @@ final class selectStoreView: UIView {
         
         backgroundColor = UIColor(r: 74, g: 74, b: 74)
         
-        addSubviews([selectStoreBtn, seperateLine, bagBtn, bagLabel])
+        addSubviews([selectStoreBtn, seperateLine, poketBtn, bagLabel])
         
         selectStoreBtn.snp.makeConstraints {
             $0.top.equalToSuperview().inset(10)
@@ -236,14 +241,14 @@ final class selectStoreView: UIView {
             $0.height.equalTo(1)
         }
         
-        bagBtn.snp.makeConstraints {
+        poketBtn.snp.makeConstraints {
             $0.top.equalToSuperview().inset(10)
             $0.trailing.equalToSuperview().inset(10)
         }
         
         bagLabel.snp.makeConstraints {
-            $0.centerX.equalTo(bagBtn)
-            $0.top.equalTo(bagBtn.snp.top).inset(16)
+            $0.centerX.equalTo(poketBtn)
+            $0.top.equalTo(poketBtn.snp.top).inset(16)
         }
     }
 }
