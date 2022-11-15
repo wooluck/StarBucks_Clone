@@ -22,12 +22,26 @@ class PoketViewController: TabmanViewController {
     
     private lazy var emptyView = EmptyView()
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.navigationBar.backgroundColor = UIColor(r: 74, g: 74, b: 74)
+        
+    }
+    
+    // MARK: - viewWillDisappear()
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.backgroundColor = .white
+    }
+    
     
     // MARK: - viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
+//        view.backgroundColor = UIColor(r: 74, g: 74, b: 74)
         setupNav()
         setView()
+        
     }
 }
 
@@ -41,7 +55,8 @@ extension PoketViewController {
 //        appearance.configureWithOpaqueBackground()
 //        appearance.backgroundColor = UIColor(r: 74, g: 74, b: 74)
 //        self.navigationController?.navigationBar.standardAppearance = appearance;
-//        self.navigationController?.navigationBar.scrollEdgeAppearance = self.navigationController?.navigationBar.standardAppearance        
+//        self.navigationController?.navigationBar.scrollEdgeAppearance = self.navigationController?.navigationBar.standardAppearance
+        
     }
     
     private func setView() {
@@ -117,7 +132,13 @@ class SelectStoreView: UIView {
 
 // MARK: - class SelectFoodOrProduct
 class SelectFoodOrProduct: UIView {
+    private lazy var beverageFoodLabel = UILabel()
     
+    private lazy var productLabel = UILabel()
+    
+    private lazy var beverageFoodCountLabel = UILabel()
+    
+    private lazy var productCountLabel = UILabel()
     // MARK: - init()
     override init(frame: CGRect) {
         super.init(frame: frame)

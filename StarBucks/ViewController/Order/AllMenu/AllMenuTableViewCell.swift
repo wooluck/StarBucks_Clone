@@ -9,19 +9,20 @@ import Foundation
 import UIKit
 
 class AllMenuTableViewCell: UITableViewCell {
+    static let id = "AllMenuTableViewCell"
     
-    private lazy var menuImage = UIImageView().then {
+    lazy var menuImage = UIImageView().then {
         $0.image = UIImage(named: "recommend")
     }
     
-    private lazy var kindKRLabel = UILabel().then {
+    lazy var kindKRLabel = UILabel().then {
         $0.text = "추천"
         $0.font = .systemFont(ofSize: 18, weight: .bold)
     }
     
-    private lazy var kindENGLabel = UILabel().then {
+    lazy var kindENGLabel = UILabel().then {
         $0.text = "Recommend"
-        $0.font = .systemFont(ofSize: 15, weight: .light)
+        $0.font = .systemFont(ofSize: 14, weight: .light)
     }
     
     // MARK: - init()
@@ -29,7 +30,7 @@ class AllMenuTableViewCell: UITableViewCell {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
 
             setupLayout()
-            backgroundColor = .red
+            
         }
         
         required init?(coder: NSCoder) {
@@ -42,19 +43,21 @@ extension AllMenuTableViewCell {
         addSubviews([menuImage, kindKRLabel, kindENGLabel])
         
         menuImage.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.leading.equalToSuperview()
-            $0.width.height.equalTo(100)
+            $0.top.equalToSuperview().inset(20)
+            $0.leading.equalToSuperview().inset(20)
+            $0.width.height.equalTo(70)
+            $0.bottom.equalToSuperview()
         }
         
         kindKRLabel.snp.makeConstraints {
-            $0.top.equalTo(menuImage.snp.top)
-            $0.leading.equalTo(menuImage.snp.trailing)
+            $0.top.equalTo(menuImage.snp.top).offset(10)
+            $0.leading.equalTo(menuImage.snp.trailing).offset(20)
         }
         
         kindENGLabel.snp.makeConstraints {
-            $0.top.equalTo(kindKRLabel.snp.bottom)
-            $0.leading.equalTo(menuImage.snp.trailing)
+            $0.top.equalTo(kindKRLabel.snp.bottom).offset(10)
+            $0.leading.equalTo(menuImage.snp.trailing).offset(20)
+            $0.trailing.equalToSuperview().inset(20)
         }
         
     }

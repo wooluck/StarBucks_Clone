@@ -6,6 +6,9 @@
 //
 
 import Foundation
+//struct Menus: Codable {
+//    let menus: [Menu]
+//}
 
 struct Menu: Codable {
     let id: Int
@@ -15,3 +18,5 @@ struct Menu: Codable {
     let image: String
     let kcal: Int
 }
+
+typealias Menus = [Menu]

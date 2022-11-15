@@ -8,7 +8,7 @@
 import UIKit
 import Then
 import SnapKit
-import Parchment
+//import Parchment
 import Tabman
 import Pageboy
 import RxCocoa
@@ -17,7 +17,6 @@ import NSObject_Rx
 
 // Order탭 했을 시 나오는 첫화면 
 class OrderViewController: TabmanViewController {
-    
     var viewControllers: Array<UIViewController> = [AllMenuViewController(), MyMenuViewController()]
     
     private lazy var cakeReservation = UIButton().then {

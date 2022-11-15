@@ -7,9 +7,18 @@
 
 import Foundation
 import UIKit
+import RxCocoa
+import RxSwift
+import NSObject_Rx
 
 // 전체메뉴 버튼 눌렀을 시 나오는 화면 
 class AllMenuViewController: UIViewController {
+    
+    let viewModel = AllMenuViewModel()
+    let trigger = PublishRelay<Void>()
+    
+    var menuRelay = BehaviorRelay<Menus>(value: [])
+    
     private lazy var subTitleMenu = subTitleMenusView()
     
     private lazy var shadowLine = UIView().then {
@@ -18,6 +27,8 @@ class AllMenuViewController: UIViewController {
     
     private lazy var tableView = UITableView().then {
         $0.register(AllMenuTableViewCell.self, forCellReuseIdentifier: "AllMenuTableViewCell")
+        $0.rowHeight = UITableView.automaticDimension
+        $0.separatorStyle = .none
         $0.backgroundColor = .white
     }
     
@@ -25,7 +36,9 @@ class AllMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
+        tableViewBind()
         
+        trigger.accept(())
     }
 }
 
@@ -53,6 +66,32 @@ extension AllMenuViewController {
             $0.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
+    }
+    
+    private func tableViewBind() {
+        let req = viewModel.transform(req: .init(trigger: trigger))
+        req.menusRelay.bind { [weak self] menus in
+            guard let self = `self` else { return }
+            self.menuRelay.accept(menus)
+            print("menus : \(menus)")
+        }.disposed(by: rx.disposeBag)
+        
+        self.menuRelay.asDriver()
+            .drive(tableView.rx.items) { table, row, item in
+                guard let cell = table.dequeueReusableCell(withIdentifier: AllMenuTableViewCell.id) as? AllMenuTableViewCell else { return UITableViewCell() }
+                print("@@ \(table) // \(row) // \(item)")
+                
+                if let url = URL(string: item.image) {
+                    cell.menuImage.load
+                }
+                cell.kindKRLabel.text = item.name
+                cell.kindENGLabel.text = item.description
+                
+                return cell
+            }.disposed(by: rx.disposeBag)
+        
+//        tableView.rowHeight = UITableView.automaticDimension
+        
     }
 }
 
