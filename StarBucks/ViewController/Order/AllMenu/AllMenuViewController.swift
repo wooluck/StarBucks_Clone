@@ -81,9 +81,21 @@ extension AllMenuViewController {
                 guard let cell = table.dequeueReusableCell(withIdentifier: AllMenuTableViewCell.id) as? AllMenuTableViewCell else { return UITableViewCell() }
                 print("@@ \(table) // \(row) // \(item)")
                 
-                if let url = URL(string: item.image) {
-                    cell.menuImage.load
-                }
+                                  
+                    if let url = URL(string: item.image) {
+
+                        cell.menuImage.load(url: url)
+
+                                let imageData = try! Data(contentsOf: url)
+
+                        cell.menuImage.image = UIImage(data: imageData)
+
+                            } else {
+
+                                print("Image URL Not Failed")
+
+                            }
+                
                 cell.kindKRLabel.text = item.name
                 cell.kindENGLabel.text = item.description
                 

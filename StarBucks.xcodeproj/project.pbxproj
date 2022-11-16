@@ -19,6 +19,7 @@
 		7A24505229223E840049EED5 /* PoketProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A24505129223E840049EED5 /* PoketProductViewController.swift */; };
 		7A2450542923613D0049EED5 /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2450532923613D0049EED5 /* OrderViewModel.swift */; };
 		7A245056292372ED0049EED5 /* AllMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A245055292372ED0049EED5 /* AllMenuViewModel.swift */; };
+		7A2450582924BC600049EED5 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2450572924BC600049EED5 /* UIImageView.swift */; };
 		7AB3CD672918F5EF0001415F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD662918F5EF0001415F /* AppDelegate.swift */; };
 		7AB3CD692918F5EF0001415F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD682918F5EF0001415F /* SceneDelegate.swift */; };
 		7AB3CD6B2918F5EF0001415F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD6A2918F5EF0001415F /* HomeViewController.swift */; };
@@ -52,6 +53,7 @@
 		7A24505129223E840049EED5 /* PoketProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoketProductViewController.swift; sourceTree = "<group>"; };
 		7A2450532923613D0049EED5 /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
 		7A245055292372ED0049EED5 /* AllMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMenuViewModel.swift; sourceTree = "<group>"; };
+		7A2450572924BC600049EED5 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		7AB1500B4BBF580FA724E1AF /* Pods_StarBucks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StarBucks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AB3CD632918F5EF0001415F /* StarBucks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarBucks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AB3CD662918F5EF0001415F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				7AB3CD84291909FE0001415F /* UIView.swift */,
 				7AB3CD8629190A190001415F /* UIColor.swift */,
 				7AB3CD8829190D070001415F /* CALayer.swift */,
+				7A2450572924BC600049EED5 /* UIImageView.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AB3CD85291909FE0001415F /* UIView.swift in Sources */,
+				7A2450582924BC600049EED5 /* UIImageView.swift in Sources */,
 				7AB3CD6B2918F5EF0001415F /* HomeViewController.swift in Sources */,
 				7AB3CD97291A395F0001415F /* Menu.swift in Sources */,
 				7AB3CD7D2918F7C50001415F /* OrderViewController.swift in Sources */,
