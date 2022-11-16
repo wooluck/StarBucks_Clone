@@ -30,6 +30,7 @@ class AllMenuViewController: UIViewController {
         $0.rowHeight = UITableView.automaticDimension
         $0.separatorStyle = .none
         $0.backgroundColor = .white
+        
     }
     
     // MARK: - viewDidLoad()
@@ -48,13 +49,13 @@ extension AllMenuViewController {
         view.addSubviews([subTitleMenu,
                           shadowLine,
                           tableView])
-
+        
         subTitleMenu.snp.makeConstraints {
             $0.top.equalTo(self.view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(55)
         }
-
+        
         shadowLine.snp.makeConstraints {
             $0.top.equalTo(subTitleMenu.snp.bottom)
             $0.leading.trailing.equalToSuperview()
@@ -73,36 +74,28 @@ extension AllMenuViewController {
         req.menusRelay.bind { [weak self] menus in
             guard let self = `self` else { return }
             self.menuRelay.accept(menus)
-            print("menus : \(menus)")
+//            print("menus : \(menus)")
         }.disposed(by: rx.disposeBag)
         
         self.menuRelay.asDriver()
             .drive(tableView.rx.items) { table, row, item in
                 guard let cell = table.dequeueReusableCell(withIdentifier: AllMenuTableViewCell.id) as? AllMenuTableViewCell else { return UITableViewCell() }
-                print("@@ \(table) // \(row) // \(item)")
                 
-                                  
-                    if let url = URL(string: item.image) {
-
-                        cell.menuImage.load(url: url)
-
-                                let imageData = try! Data(contentsOf: url)
-
-                        cell.menuImage.image = UIImage(data: imageData)
-
-                            } else {
-
-                                print("Image URL Not Failed")
-
-                            }
-                
+                if let url = URL(string: item.image) {
+                    cell.menuImage.load(url: url)
+                    let imageData = try! Data(contentsOf: url)
+                    cell.menuImage.image = UIImage(data: imageData)
+                } else {
+                    print("Image URL Not Failed")
+                }
+                cell.selectionStyle = .none
                 cell.kindKRLabel.text = item.name
                 cell.kindENGLabel.text = item.description
                 
                 return cell
             }.disposed(by: rx.disposeBag)
         
-//        tableView.rowHeight = UITableView.automaticDimension
+        //        tableView.rowHeight = UITableView.automaticDimension
         
     }
 }

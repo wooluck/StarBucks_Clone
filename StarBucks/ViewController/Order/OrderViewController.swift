@@ -113,7 +113,11 @@ extension OrderViewController {
             .bind {
                 self.navigationController?.pushViewController(PoketViewController(), animated: true)
             }.disposed(by: rx.disposeBag)
-            
+        
+        self.selectStore.selectStoreBtn.rx.tap
+            .bind {
+                self.navigationController?.pushViewController(LocationViewController(), animated: true)
+            }.disposed(by: rx.disposeBag)
     }
     
     private func tabManSet() {
@@ -182,7 +186,7 @@ extension OrderViewController: PageboyViewControllerDataSource, TMBarDataSource 
 // MARK: - class selectStoreView
 final class selectStoreView: UIView {
     
-    private lazy var selectStoreBtn = UIButton().then {
+    lazy var selectStoreBtn = UIButton().then {
         $0.setTitle("주문할 매장을 선택해 주세요", for: .normal)
         $0.setImage(.init(systemName: "arrow.turn.right.down"), for: .normal)
         $0.tintColor = .white
