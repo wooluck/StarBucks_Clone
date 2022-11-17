@@ -12,7 +12,7 @@ class AllMenuDetailViewController: UIViewController {
     
     private lazy var titleLabel = UILabel().then {
         $0.text = "아이스 카페 아메리카노"
-        $0.font = .systemFont(ofSize: 22, weight: .bold)
+        $0.font = .systemFont(ofSize: 24, weight: .bold)
     }
     
     private lazy var bestLabel = UILabel().then {
@@ -23,13 +23,14 @@ class AllMenuDetailViewController: UIViewController {
     
     private lazy var detailLabel = UILabel().then {
         $0.text = "진한 에스프레소에 시원한 정수물과 얼음을 더하여 스타벅스의 깔끔하고 강렬한 에스프레소를 가장 부드럽고 시원하게 즐길 수 있는 커피"
-        $0.font = .systemFont(ofSize: 10, weight: .medium)
+        $0.font = .systemFont(ofSize: 16, weight: .medium)
+        $0.textColor = UIColor.gray
         $0.numberOfLines = 0
     }
     
     private lazy var priceLabel = UILabel().then {
         $0.text = "4,500원"
-        $0.font = .systemFont(ofSize: 20, weight: .bold)
+        $0.font = .systemFont(ofSize: 24, weight: .bold)
     }
     
     private lazy var hotBtn = UIButton().then {
@@ -50,19 +51,41 @@ class AllMenuDetailViewController: UIViewController {
         $0.layer.cornerRadius = 10
     }
     
-    private lazy var detailLabelView = UIView()
+    private lazy var detailLabelView = DetailLabelView()
     
-    private lazy var nutritionBtn = UIButton()
+    private lazy var seperateLine = UIView().then {
+        $0.backgroundColor = .systemGray5
+    }
+    
+    private lazy var nutritionBtn = UIButton().then {
+        $0.setTitle("제품 영양 정보", for: .normal)
+        $0.setImage(.init(systemName: "arrowshape.turn.up.right"), for: .normal)
+        $0.tintColor = .gray
+        $0.setTitleColor(.black, for: .normal)
+        $0.imageView?.contentMode = .scaleAspectFit
+        $0.titleLabel?.font = .boldSystemFont(ofSize: 22)
+        $0.contentHorizontalAlignment = .leading
+        $0.imageEdgeInsets = .init(top: 0, left: 330, bottom: 0, right: 0)
+    }
     
 //    private lazy var otherMenuView = UICollectionView()
     private lazy var otherMenuView = UIView()
     
-    private lazy var orderBtn = UIButton()
+    private lazy var orderBtnView = OrderBtnView()
+    
+    // MARK: - view
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        tabBarController?.tabBar.isHidden = false
+    }
     
     // MARK: - viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        setupLayout()
+        
         
         
     }
@@ -71,6 +94,10 @@ class AllMenuDetailViewController: UIViewController {
 // MARK: - extension
 extension AllMenuDetailViewController {
     private func setupView() {
+        tabBarController?.tabBar.isHidden = true
+        navigationItem.titleView = UIImageView(image: UIImage(named: "recommend"))
+    }
+    private func setupLayout() {
         view.backgroundColor = .white
         
         view.addSubviews([titleLabel, bestLabel,
@@ -78,13 +105,14 @@ extension AllMenuDetailViewController {
                          priceLabel,
                          hotBtn, iceBtn,
                          detailLabelView,
+                         seperateLine,
                          nutritionBtn,
                          otherMenuView,
-                         orderBtn])
+                         orderBtnView])
         
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(self.view.safeAreaLayoutGuide)
-            $0.leading.equalToSuperview().inset(20)
+            $0.leading.equalToSuperview().inset(25)
             
         }
         
@@ -95,18 +123,18 @@ extension AllMenuDetailViewController {
         
         detailLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(15)
-            $0.leading.equalToSuperview().inset(20)
-            $0.trailing.equalToSuperview().inset(20)
+            $0.leading.equalToSuperview().inset(25)
+            $0.trailing.equalToSuperview().inset(25)
         }
         
         priceLabel.snp.makeConstraints {
             $0.top.equalTo(detailLabel.snp.bottom).offset(15)
-            $0.leading.equalToSuperview().inset(20)
+            $0.leading.equalToSuperview().inset(25)
         }
         
         hotBtn.snp.makeConstraints {
             $0.top.equalTo(priceLabel.snp.bottom).offset(15)
-            $0.leading.equalToSuperview()
+            $0.leading.equalToSuperview().inset(25)
             $0.width.equalTo(100)
             $0.height.equalTo(30)
         }
@@ -119,15 +147,22 @@ extension AllMenuDetailViewController {
         }
         
         detailLabelView.snp.makeConstraints {
-            $0.top.equalTo(hotBtn.snp.bottom)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
+            $0.top.equalTo(hotBtn.snp.bottom).offset(15)
+            $0.leading.equalToSuperview().inset(25)
+            $0.trailing.equalToSuperview().inset(25)
             $0.height.equalTo(100)
         }
         
+        seperateLine.snp.makeConstraints {
+            $0.top.equalTo(detailLabelView.snp.bottom).offset(30)
+            $0.leading.equalToSuperview().inset(25)
+            $0.trailing.equalToSuperview()
+            $0.height.equalTo(1)
+        }
+        
         nutritionBtn.snp.makeConstraints {
-            $0.top.equalTo(detailLabelView.snp.bottom)
-            $0.leading.equalToSuperview()
+            $0.top.equalTo(seperateLine.snp.bottom).offset(0)
+            $0.leading.equalToSuperview().inset(5)
             $0.trailing.equalToSuperview()
             $0.height.equalTo(50)
         }
@@ -138,11 +173,116 @@ extension AllMenuDetailViewController {
             $0.height.equalTo(200)
         }
         
-        orderBtn.snp.makeConstraints {
-            $0.bottom.equalToSuperview()
+        orderBtnView.snp.makeConstraints {
+            $0.bottom.equalTo(self.view.safeAreaLayoutGuide)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
-            $0.height.equalTo(30)
+            $0.height.equalTo(60)
+        }
+    }
+}
+
+// MARK: - class DetailLabelView
+final class DetailLabelView: UIView {
+    
+    private lazy var detailLabel = UILabel().then {
+        $0.text = "블론드/디카페인 커피 Tab에서 \n블론드, 디카페인, 1/2디카페인 아메리카노를 주문할 수 있습니다."
+        $0.font = .systemFont(ofSize: 15, weight: .medium)
+        $0.textColor = UIColor.gray
+        $0.numberOfLines = 0
+    }
+    // MARK: - init()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+        setupLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupView() {
+        backgroundColor = .systemGray6
+    }
+    
+    private func setupLayout() {
+        addSubviews([detailLabel])
+        
+        detailLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(20)
+            $0.leading.equalToSuperview().inset(20)
+            $0.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview().inset(20)
+        }
+    }
+}
+
+// MARK: - class DetailLabelView
+final class OtherMenuView: UIView {
+    
+    private lazy var titleLabel = UILabel().then {
+        $0.text = "비슷한 다른 메뉴"
+        $0.font = .systemFont(ofSize: 22, weight: .medium)
+        $0.textColor = UIColor.gray
+    }
+    
+    // MARK: - init()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+        setupLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupView() {
+        backgroundColor = .systemGray6
+    }
+    
+    private func setupLayout() {
+        
+    }
+}
+
+// MARK: - class OrderBtnView
+final class OrderBtnView: UIView {
+    
+    private lazy var orderBtn = UIButton().then {
+        $0.setTitle("주문하기", for: .normal)
+        $0.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
+        $0.setTitleColor(.white, for: .normal)
+        $0.backgroundColor = UIColor(r: 47, g: 134, b: 80)
+        $0.layer.cornerRadius = 20
+    }
+    
+    
+    // MARK: - init()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+        setupLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupView() {
+//        backgroundColor = .systemGray6
+        
+    }
+    
+    private func setupLayout() {
+        addSubviews([orderBtn])
+        
+        orderBtn.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(15)
+            $0.leading.equalToSuperview().inset(25)
+            $0.trailing.equalToSuperview().inset(25)
+            $0.height.equalTo(40)
         }
     }
 }
