@@ -187,7 +187,7 @@ extension OrderViewController: PageboyViewControllerDataSource, TMBarDataSource 
 final class selectStoreView: UIView {
     
     lazy var selectStoreBtn = UIButton().then {
-        $0.setTitle("주문할 매장을 선택해 주세요", for: .normal)
+        $0.setTitle("주문할 매장을 찾아보세요", for: .normal)
         $0.setImage(.init(systemName: "arrow.turn.right.down"), for: .normal)
         $0.tintColor = .white
         $0.setTitleColor(.white, for: .normal)

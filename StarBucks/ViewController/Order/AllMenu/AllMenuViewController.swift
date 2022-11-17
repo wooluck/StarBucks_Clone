@@ -89,14 +89,17 @@ extension AllMenuViewController {
                     print("Image URL Not Failed")
                 }
                 cell.selectionStyle = .none
-                cell.kindKRLabel.text = item.name
-                cell.kindENGLabel.text = item.description
+                cell.TitleLabel.text = item.name
+                cell.subTitleLabel.text = item.description
                 
                 return cell
             }.disposed(by: rx.disposeBag)
         
-        //        tableView.rowHeight = UITableView.automaticDimension
-        
+        tableView.rx.modelSelected(Menu.self)
+            .subscribe(onNext: { menu in
+                self.navigationController?.pushViewController(AllMenuDetailViewController(), animated: true)
+                
+            }).disposed(by: rx.disposeBag)
     }
 }
 

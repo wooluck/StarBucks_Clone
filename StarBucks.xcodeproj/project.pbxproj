@@ -21,6 +21,7 @@
 		7A245056292372ED0049EED5 /* AllMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A245055292372ED0049EED5 /* AllMenuViewModel.swift */; };
 		7A2450582924BC600049EED5 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2450572924BC600049EED5 /* UIImageView.swift */; };
 		7A24505A2924D42B0049EED5 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2450592924D42B0049EED5 /* LocationViewController.swift */; };
+		7A24505C2925F1FE0049EED5 /* AllMenuDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A24505B2925F1FE0049EED5 /* AllMenuDetailViewController.swift */; };
 		7AB3CD672918F5EF0001415F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD662918F5EF0001415F /* AppDelegate.swift */; };
 		7AB3CD692918F5EF0001415F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD682918F5EF0001415F /* SceneDelegate.swift */; };
 		7AB3CD6B2918F5EF0001415F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD6A2918F5EF0001415F /* HomeViewController.swift */; };
@@ -56,6 +57,7 @@
 		7A245055292372ED0049EED5 /* AllMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMenuViewModel.swift; sourceTree = "<group>"; };
 		7A2450572924BC600049EED5 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		7A2450592924D42B0049EED5 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
+		7A24505B2925F1FE0049EED5 /* AllMenuDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMenuDetailViewController.swift; sourceTree = "<group>"; };
 		7AB1500B4BBF580FA724E1AF /* Pods_StarBucks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StarBucks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AB3CD632918F5EF0001415F /* StarBucks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarBucks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AB3CD662918F5EF0001415F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				7AB3CD8B291A124C0001415F /* AllMenuViewController.swift */,
+				7A24505B2925F1FE0049EED5 /* AllMenuDetailViewController.swift */,
 				7A245055292372ED0049EED5 /* AllMenuViewModel.swift */,
 				7AB3CD8F291A20740001415F /* AllMenuTableViewCell.swift */,
 			);
@@ -374,6 +377,7 @@
 				7AB3CD6B2918F5EF0001415F /* HomeViewController.swift in Sources */,
 				7AB3CD97291A395F0001415F /* Menu.swift in Sources */,
 				7AB3CD7D2918F7C50001415F /* OrderViewController.swift in Sources */,
+				7A24505C2925F1FE0049EED5 /* AllMenuDetailViewController.swift in Sources */,
 				7A1252E8291CDA150087656B /* AlertViewController.swift in Sources */,
 				7A245056292372ED0049EED5 /* AllMenuViewModel.swift in Sources */,
 				7A24505A2924D42B0049EED5 /* LocationViewController.swift in Sources */,

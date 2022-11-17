@@ -15,13 +15,13 @@ class AllMenuTableViewCell: UITableViewCell {
         $0.image = UIImage(named: "recommend")
     }
     
-    lazy var kindKRLabel = UILabel().then {
-        $0.text = "추천"
+    lazy var TitleLabel = UILabel().then {
+        $0.text = "딸기주스"
         $0.font = .systemFont(ofSize: 18, weight: .bold)
     }
     
-    lazy var kindENGLabel = UILabel().then {
-        $0.text = "Recommend"
+    lazy var subTitleLabel = UILabel().then {
+        $0.text = "설명 좔좔좔좔"
         $0.font = .systemFont(ofSize: 14, weight: .light)
     }
     
@@ -40,7 +40,7 @@ class AllMenuTableViewCell: UITableViewCell {
 
 extension AllMenuTableViewCell {
     private func setupLayout() {
-        addSubviews([menuImage, kindKRLabel, kindENGLabel])
+        addSubviews([menuImage, TitleLabel, subTitleLabel])
         
         menuImage.snp.makeConstraints {
             $0.top.equalToSuperview().inset(20)
@@ -49,13 +49,13 @@ extension AllMenuTableViewCell {
             $0.bottom.equalToSuperview()
         }
         
-        kindKRLabel.snp.makeConstraints {
+        TitleLabel.snp.makeConstraints {
             $0.top.equalTo(menuImage.snp.top).offset(10)
             $0.leading.equalTo(menuImage.snp.trailing).offset(20)
         }
         
-        kindENGLabel.snp.makeConstraints {
-            $0.top.equalTo(kindKRLabel.snp.bottom).offset(10)
+        subTitleLabel.snp.makeConstraints {
+            $0.top.equalTo(TitleLabel.snp.bottom).offset(10)
             $0.leading.equalTo(menuImage.snp.trailing).offset(20)
             $0.trailing.equalToSuperview().inset(20)
         }

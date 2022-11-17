@@ -24,14 +24,14 @@ class PoketViewController: TabmanViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController?.navigationBar.backgroundColor = UIColor(r: 74, g: 74, b: 74)
+//        self.navigationController?.navigationBar.backgroundColor = UIColor(r: 74, g: 74, b: 74)
         
     }
     
     // MARK: - viewWillDisappear()
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.navigationBar.backgroundColor = .white
+//        self.navigationController?.navigationBar.backgroundColor = .white
     }
     
     
