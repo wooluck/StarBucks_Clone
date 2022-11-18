@@ -10,6 +10,12 @@ import UIKit
 
 class AllMenuDetailViewController: UIViewController {
     
+    private lazy var bigImageView = UIImageView().then {
+        $0.image = UIImage(named: "coffee")
+        $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
+    }
+    
     private lazy var titleLabel = UILabel().then {
         $0.text = "아이스 카페 아메리카노"
         $0.font = .systemFont(ofSize: 24, weight: .bold)
@@ -45,10 +51,12 @@ class AllMenuDetailViewController: UIViewController {
     private lazy var iceBtn = UIButton().then {
         $0.setTitle("ICE", for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
-        $0.setTitleColor(UIColor(r: 20, g: 70, b: 102), for: .normal)
+//        $0.setTitleColor(UIColor(r: 20, g: 70, b: 102), for: .normal)
+        $0.setTitleColor(UIColor.white, for: .normal)
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.systemGray4.cgColor
         $0.layer.cornerRadius = 10
+        $0.backgroundColor = UIColor(r: 63, g: 108, b: 198)
     }
     
     private lazy var detailLabelView = DetailLabelView()
@@ -69,7 +77,7 @@ class AllMenuDetailViewController: UIViewController {
     }
     
 //    private lazy var otherMenuView = UICollectionView()
-    private lazy var otherMenuView = UIView()
+    private lazy var othersMenuView = UIView()
     
     private lazy var orderBtnView = OrderBtnView()
     
@@ -95,23 +103,30 @@ class AllMenuDetailViewController: UIViewController {
 extension AllMenuDetailViewController {
     private func setupView() {
         tabBarController?.tabBar.isHidden = true
-        navigationItem.titleView = UIImageView(image: UIImage(named: "recommend"))
+//        navigationItem.titleView = UIImageView(image: UIImage(named: "recommend"))
     }
     private func setupLayout() {
         view.backgroundColor = .white
         
-        view.addSubviews([titleLabel, bestLabel,
+        view.addSubviews([bigImageView,
+                         titleLabel, bestLabel,
                          detailLabel,
                          priceLabel,
                          hotBtn, iceBtn,
                          detailLabelView,
                          seperateLine,
                          nutritionBtn,
-                         otherMenuView,
+                         othersMenuView,
                          orderBtnView])
         
+        bigImageView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+//            $0.height.equalTo(150)
+        }
+        
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(self.view.safeAreaLayoutGuide)
+            $0.top.equalTo(bigImageView.snp.bottom).offset(20)
             $0.leading.equalToSuperview().inset(25)
             
         }
@@ -135,14 +150,14 @@ extension AllMenuDetailViewController {
         hotBtn.snp.makeConstraints {
             $0.top.equalTo(priceLabel.snp.bottom).offset(15)
             $0.leading.equalToSuperview().inset(25)
-            $0.width.equalTo(100)
+            $0.width.equalTo(self.view.frame.width / 2 - 25 )
             $0.height.equalTo(30)
         }
         
         iceBtn.snp.makeConstraints {
             $0.top.equalTo(hotBtn.snp.top)
             $0.leading.equalTo(hotBtn.snp.trailing)
-            $0.width.equalTo(100)
+            $0.width.equalTo(self.view.frame.width / 2 - 25 )
             $0.height.equalTo(30)
         }
         
@@ -167,7 +182,7 @@ extension AllMenuDetailViewController {
             $0.height.equalTo(50)
         }
         
-        otherMenuView.snp.makeConstraints {
+        othersMenuView.snp.makeConstraints {
             $0.top.equalTo(nutritionBtn.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(200)
@@ -247,6 +262,35 @@ final class OtherMenuView: UIView {
     }
 }
 
+// MARK: - class OthersMenuView
+final class OthersMenuView: UIView {
+    private lazy var othersMenuLabel = UILabel().then {
+        $0.text = "비슷한 다른 메뉴"
+        $0.font = .systemFont(ofSize: 24, weight: .medium)
+    }
+//    private lazy var othersMenu
+    
+    // MARK: - init()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+        setupLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupView() {
+//        backgroundColor = .systemGray6
+        
+    }
+    
+    private func setupLayout() {
+    
+    }
+}
+
 // MARK: - class OrderBtnView
 final class OrderBtnView: UIView {
     
@@ -286,3 +330,4 @@ final class OrderBtnView: UIView {
         }
     }
 }
+
