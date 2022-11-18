@@ -10,10 +10,20 @@ import UIKit
 
 class AllMenuDetailViewController: UIViewController {
     
+    private lazy var scrollView = UIScrollView().then {
+        $0.backgroundColor = .clear
+//        $0.showsVerticalScrollIndicator = false
+//        $0.translatesAutoresizingMaskIntoConstraints = false
+//        $0.backgroundColor = .blue
+    }
+    
+    private lazy var viewInScroll = UIView()
+    
     private lazy var bigImageView = UIImageView().then {
         $0.image = UIImage(named: "coffee")
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
+        $0.backgroundColor = .purple
     }
     
     private lazy var titleLabel = UILabel().then {
@@ -71,13 +81,13 @@ class AllMenuDetailViewController: UIViewController {
         $0.tintColor = .gray
         $0.setTitleColor(.black, for: .normal)
         $0.imageView?.contentMode = .scaleAspectFit
-        $0.titleLabel?.font = .boldSystemFont(ofSize: 22)
+        $0.titleLabel?.font = .boldSystemFont(ofSize: 20)
         $0.contentHorizontalAlignment = .leading
         $0.imageEdgeInsets = .init(top: 0, left: 330, bottom: 0, right: 0)
     }
     
 //    private lazy var otherMenuView = UICollectionView()
-    private lazy var othersMenuView = UIView()
+    private lazy var othersMenuView = OthersMenuView()
     
     private lazy var orderBtnView = OrderBtnView()
     
@@ -93,22 +103,48 @@ class AllMenuDetailViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         setupLayout()
-        
-        
-        
+
     }
 }
 
 // MARK: - extension
 extension AllMenuDetailViewController {
     private func setupView() {
+        view.backgroundColor = .white
         tabBarController?.tabBar.isHidden = true
-//        navigationItem.titleView = UIImageView(image: UIImage(named: "recommend"))
     }
     private func setupLayout() {
-        view.backgroundColor = .white
+        view.addSubviews([scrollView,
+                         orderBtnView])
         
-        view.addSubviews([bigImageView,
+        scrollView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(100)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
+//            $0.width.equalTo(view.frame.width)
+        }
+        
+        orderBtnView.snp.makeConstraints {
+            $0.bottom.equalToSuperview()
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
+            $0.height.equalTo(60)
+        }
+        
+        scrollView.addSubviews([viewInScroll])
+        
+        viewInScroll.snp.makeConstraints {
+            $0.top.equalToSuperview()
+//            $0.leading.equalToSuperview()
+//            $0.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
+//            $0.top.bottom.equalToSuperview()
+            $0.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
+        }
+        
+        viewInScroll.addSubviews([
+            bigImageView,
                          titleLabel, bestLabel,
                          detailLabel,
                          priceLabel,
@@ -117,7 +153,7 @@ extension AllMenuDetailViewController {
                          seperateLine,
                          nutritionBtn,
                          othersMenuView,
-                         orderBtnView])
+                         ])
         
         bigImageView.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -126,6 +162,7 @@ extension AllMenuDetailViewController {
         }
         
         titleLabel.snp.makeConstraints {
+            
             $0.top.equalTo(bigImageView.snp.bottom).offset(20)
             $0.leading.equalToSuperview().inset(25)
             
@@ -186,14 +223,10 @@ extension AllMenuDetailViewController {
             $0.top.equalTo(nutritionBtn.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(200)
+            $0.bottom.equalToSuperview()
         }
         
-        orderBtnView.snp.makeConstraints {
-            $0.bottom.equalTo(self.view.safeAreaLayoutGuide)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
-            $0.height.equalTo(60)
-        }
+
     }
 }
 
@@ -202,7 +235,7 @@ final class DetailLabelView: UIView {
     
     private lazy var detailLabel = UILabel().then {
         $0.text = "블론드/디카페인 커피 Tab에서 \n블론드, 디카페인, 1/2디카페인 아메리카노를 주문할 수 있습니다."
-        $0.font = .systemFont(ofSize: 15, weight: .medium)
+        $0.font = .systemFont(ofSize: 14, weight: .medium)
         $0.textColor = UIColor.gray
         $0.numberOfLines = 0
     }
@@ -233,13 +266,32 @@ final class DetailLabelView: UIView {
     }
 }
 
-// MARK: - class DetailLabelView
-final class OtherMenuView: UIView {
-    
-    private lazy var titleLabel = UILabel().then {
+// MARK: - class OthersMenuView
+final class OthersMenuView: UIView {
+    private lazy var othersMenuLabel = UILabel().then {
         $0.text = "비슷한 다른 메뉴"
-        $0.font = .systemFont(ofSize: 22, weight: .medium)
-        $0.textColor = UIColor.gray
+        $0.font = .systemFont(ofSize: 18, weight: .medium)
+    }
+    
+    private lazy var scrollView = UIScrollView().then {
+        $0.backgroundColor = .clear
+        $0.showsVerticalScrollIndicator = false
+    }
+    
+    private lazy var othersMenuStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.distribution = .equalSpacing
+        $0.alignment = .center
+        $0.spacing = 10.0
+        $0.backgroundColor = .brown
+    }
+    
+    private lazy var coffeeImage = UIImageView().then {
+        $0.image = UIImage.init(systemName: "coffee")
+    }
+    
+    private lazy var coffeeName = UILabel().then {
+        $0.text = "아메리카노"
     }
     
     // MARK: - init()
@@ -258,36 +310,22 @@ final class OtherMenuView: UIView {
     }
     
     private func setupLayout() {
+    addSubviews([othersMenuLabel,
+                 scrollView])
         
-    }
-}
-
-// MARK: - class OthersMenuView
-final class OthersMenuView: UIView {
-    private lazy var othersMenuLabel = UILabel().then {
-        $0.text = "비슷한 다른 메뉴"
-        $0.font = .systemFont(ofSize: 24, weight: .medium)
-    }
-//    private lazy var othersMenu
-    
-    // MARK: - init()
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupView()
-        setupLayout()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setupView() {
-//        backgroundColor = .systemGray6
+        othersMenuLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(30)
+            $0.leading.equalToSuperview().inset(23)
+        }
         
-    }
-    
-    private func setupLayout() {
-    
+        scrollView.snp.makeConstraints {
+            $0.top.equalTo(othersMenuLabel.snp.bottom).offset(10)
+            $0.leading.equalToSuperview().inset(30)
+            $0.trailing.equalToSuperview().inset(30)
+            $0.bottom.equalToSuperview().inset(30)
+        }
+        
+//        scrollView.arranged
     }
 }
 
@@ -315,7 +353,7 @@ final class OrderBtnView: UIView {
     }
     
     private func setupView() {
-//        backgroundColor = .systemGray6
+        backgroundColor = .white
         
     }
     
