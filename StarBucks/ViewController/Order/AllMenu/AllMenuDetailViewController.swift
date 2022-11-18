@@ -129,17 +129,14 @@ extension AllMenuDetailViewController {
             $0.bottom.equalToSuperview()
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
-            $0.height.equalTo(60)
+            $0.height.equalTo(100)
         }
         
         scrollView.addSubviews([viewInScroll])
         
         viewInScroll.snp.makeConstraints {
             $0.top.equalToSuperview()
-//            $0.leading.equalToSuperview()
-//            $0.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
-//            $0.top.bottom.equalToSuperview()
             $0.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
         }
         
