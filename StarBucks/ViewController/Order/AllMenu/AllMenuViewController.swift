@@ -11,14 +11,25 @@ import RxCocoa
 import RxSwift
 import NSObject_Rx
 
+// 음료, 푸드, 상품 탭
+//enum AllmenuType {
+//    case 200...377:
+//    case 378...599:
+//    case 600...800:
+//}
+
 // 전체메뉴 버튼 눌렀을 시 나오는 화면 
 class AllMenuViewController: UIViewController {
+    
+    static let selectMenu = AllMenuViewController()
     
     let viewModel = AllMenuViewModel()
     let trigger = PublishRelay<Void>()
     var beverageImg = UIImage()
     
     var menuRelay = BehaviorRelay<Menus>(value: [])
+    var kcalRelay = BehaviorRelay<Int>(value: 0)
+    
     
     private lazy var subTitleMenu = subTitleMenusView()
     
@@ -31,7 +42,6 @@ class AllMenuViewController: UIViewController {
         $0.rowHeight = UITableView.automaticDimension
         $0.separatorStyle = .none
         $0.backgroundColor = .white
-        
     }
     
     // MARK: - viewDidLoad()
@@ -81,6 +91,8 @@ extension AllMenuViewController {
             .drive(tableView.rx.items) { table, row, item in
                 guard let cell = table.dequeueReusableCell(withIdentifier: AllMenuTableViewCell.id) as? AllMenuTableViewCell else { return UITableViewCell() }
                 
+                //                if 200..<378 ~= item.id {
+                print("옴?")
                 if let url = URL(string: item.image) {
                     cell.menuImage.load(url: url)
                     let imageData = try! Data(contentsOf: url)
@@ -92,7 +104,7 @@ extension AllMenuViewController {
                 cell.selectionStyle = .none
                 cell.TitleLabel.text = item.name
                 cell.subTitleLabel.text = item.description
-                
+                //                }
                 return cell
             }.disposed(by: rx.disposeBag)
         
@@ -100,6 +112,7 @@ extension AllMenuViewController {
             .subscribe(onNext: { menu in
                 print("wooluck menu :\(menu)")
                 var AllVC = AllMenuDetailViewController()
+                var AllNuVC = AllMenuDetailNutritionViewController()
                 AllVC.titleLabel.text = menu.name
                 AllVC.detailLabel.text = menu.description
                 AllVC.priceLabel.text = "\(menu.price)원"
@@ -110,7 +123,10 @@ extension AllMenuViewController {
                 } else {
                     print("Image URL Not Failed")
                 }
-//                AllVC.bigImageView.image = self.beverageImg
+                //                AllNuVC.bringKcal.accept(menu.kcal)
+                self.kcalRelay.accept(menu.kcal)
+                
+                print("wooluck menu.kacl \(AllNuVC.bringKcal)")
                 self.navigationController?.pushViewController(AllVC, animated: true)
             }).disposed(by: rx.disposeBag)
     }

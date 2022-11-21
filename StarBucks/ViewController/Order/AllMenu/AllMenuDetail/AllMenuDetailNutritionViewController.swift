@@ -9,21 +9,35 @@ import Foundation
 import UIKit
 import Tabman
 import Pageboy
+import RxCocoa
+import RxSwift
 
 class AllMenuDetailNutritionViewController: TabmanViewController {
+    
+    var model = AllMenuViewModel()
+    var exex = AllMenuViewController()
+    var bringKcal = PublishRelay<Int>()
+    var passKcal: Int?
     
     private lazy var nutritionTitle = UILabel().then {
         $0.text = "제품 영양 정보"
         $0.font = .systemFont(ofSize: 18, weight: .medium)
     }
     
+    lazy var kcal = UILabel().then {
+        $0.text = "칼로리 : \(passKcal)"
+        $0.font = .systemFont(ofSize: 70, weight: .bold)
+    }
+    
     private lazy var vcs : Array<UIViewController> = []
+
     
     // MARK: - viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupLayout()
+        bindView()
     }
 }
 
@@ -49,13 +63,26 @@ extension AllMenuDetailNutritionViewController {
     }
     
     private func setupLayout() {
-        view.addSubviews([nutritionTitle])
+        view.addSubviews([nutritionTitle,
+                         kcal])
         
         nutritionTitle.snp.makeConstraints {
             $0.top.equalToSuperview().inset(40)
             $0.centerX.equalToSuperview()
         }
         
+        kcal.snp.makeConstraints {
+            $0.centerX.centerY.equalToSuperview()
+        }
+        
+    }
+    
+    private func bindView() {
+        model.menusRelay.asDriver()
+            .drive(onNext:{ [weak self] kcal in
+                guard let self = `self` else { return }
+                
+            }).disposed(by: rx.disposeBag)
     }
 }
 //
