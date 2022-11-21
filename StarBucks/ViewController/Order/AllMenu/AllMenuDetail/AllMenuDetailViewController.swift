@@ -96,6 +96,7 @@ class AllMenuDetailViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         tabBarController?.tabBar.isHidden = false
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     // MARK: - viewDidLoad()
@@ -103,6 +104,7 @@ class AllMenuDetailViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         setupLayout()
+        bindView()
 
     }
 }
@@ -110,18 +112,20 @@ class AllMenuDetailViewController: UIViewController {
 // MARK: - extension
 extension AllMenuDetailViewController {
     private func setupView() {
+        navigationController?.navigationBar.prefersLargeTitles = false
         view.backgroundColor = .white
         tabBarController?.tabBar.isHidden = true
+        
     }
     private func setupLayout() {
         view.addSubviews([scrollView,
                          orderBtnView])
         
         scrollView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(100)
+            $0.top.equalToSuperview()
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalTo(orderBtnView.snp.top)
 //            $0.width.equalTo(view.frame.width)
         }
         
@@ -225,6 +229,33 @@ extension AllMenuDetailViewController {
         
 
     }
+    
+    private func bindView() {
+        hotBtn.rx.tap
+            .bind { [weak self] _ in
+                guard let self = `self` else { return }
+                self.hotBtn.backgroundColor = .red
+                self.hotBtn.setTitleColor(.white, for: .normal)
+                self.iceBtn.backgroundColor = .white
+                self.iceBtn.setTitleColor(.gray, for: .normal)
+                
+            }.disposed(by: rx.disposeBag)
+        
+        iceBtn.rx.tap
+            .bind { [weak self] _ in
+                guard let self = `self` else { return }
+                self.hotBtn.backgroundColor = .white
+                self.hotBtn.setTitleColor(.gray, for: .normal)
+                self.iceBtn.backgroundColor = UIColor(r: 63, g: 108, b: 198)
+                self.iceBtn.setTitleColor(.white, for: .normal)
+            }.disposed(by: rx.disposeBag)
+        
+        nutritionBtn.rx.tap
+            .bind { [weak self] _ in
+                guard let self = `self` else { return }
+                self.present(AllMenuDetailNutritionViewController(), animated: true, completion: nil)
+            }.disposed(by: rx.disposeBag)
+    }
 }
 
 // MARK: - class DetailLabelView
@@ -280,11 +311,21 @@ final class OthersMenuView: UIView {
         $0.distribution = .equalSpacing
         $0.alignment = .center
         $0.spacing = 10.0
-        $0.backgroundColor = .brown
+//        $0.backgroundColor = .brown
+    }
+    
+    private lazy var eachMenuStackView = UIStackView().then {
+        $0.axis = .vertical
+        $0.distribution = .equalSpacing
+        $0.alignment = .center
+        $0.spacing = 10.0
+        
+//        $0.backgroundColor = .brown
     }
     
     private lazy var coffeeImage = UIImageView().then {
-        $0.image = UIImage.init(systemName: "coffee")
+        $0.image = UIImage.init(named: "recommend")
+        
     }
     
     private lazy var coffeeName = UILabel().then {
@@ -322,7 +363,24 @@ final class OthersMenuView: UIView {
             $0.bottom.equalToSuperview().inset(30)
         }
         
-//        scrollView.arranged
+        scrollView.addSubviews([othersMenuStackView])
+        
+        othersMenuStackView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        for _ in 0...5 {
+            othersMenuStackView.addArrangedSubview(eachMenuStackView)
+        }
+        
+        eachMenuStackView.addArrangedSubview(coffeeImage)
+        eachMenuStackView.addArrangedSubview(coffeeName)
+        
+        coffeeImage.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.width.height.equalTo(80)
+        }
+        
     }
 }
 

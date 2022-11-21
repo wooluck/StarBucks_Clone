@@ -23,6 +23,9 @@
 		7A24505A2924D42B0049EED5 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2450592924D42B0049EED5 /* LocationViewController.swift */; };
 		7A24505C2925F1FE0049EED5 /* AllMenuDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A24505B2925F1FE0049EED5 /* AllMenuDetailViewController.swift */; };
 		7A24505E29275BCB0049EED5 /* AllMenuOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A24505D29275BCB0049EED5 /* AllMenuOrderViewController.swift */; };
+		7A245061292B3CF00049EED5 /* AllMenuDetailNutritionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A245060292B3CF00049EED5 /* AllMenuDetailNutritionViewController.swift */; };
+		7A245063292B44430049EED5 /* tallSizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A245062292B44430049EED5 /* tallSizeViewController.swift */; };
+		7A245065292B445B0049EED5 /* grandeSizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A245064292B445B0049EED5 /* grandeSizeViewController.swift */; };
 		7AB3CD672918F5EF0001415F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD662918F5EF0001415F /* AppDelegate.swift */; };
 		7AB3CD692918F5EF0001415F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD682918F5EF0001415F /* SceneDelegate.swift */; };
 		7AB3CD6B2918F5EF0001415F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3CD6A2918F5EF0001415F /* HomeViewController.swift */; };
@@ -60,6 +63,9 @@
 		7A2450592924D42B0049EED5 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		7A24505B2925F1FE0049EED5 /* AllMenuDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMenuDetailViewController.swift; sourceTree = "<group>"; };
 		7A24505D29275BCB0049EED5 /* AllMenuOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMenuOrderViewController.swift; sourceTree = "<group>"; };
+		7A245060292B3CF00049EED5 /* AllMenuDetailNutritionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMenuDetailNutritionViewController.swift; sourceTree = "<group>"; };
+		7A245062292B44430049EED5 /* tallSizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tallSizeViewController.swift; sourceTree = "<group>"; };
+		7A245064292B445B0049EED5 /* grandeSizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = grandeSizeViewController.swift; sourceTree = "<group>"; };
 		7AB1500B4BBF580FA724E1AF /* Pods_StarBucks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StarBucks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AB3CD632918F5EF0001415F /* StarBucks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarBucks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AB3CD662918F5EF0001415F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -123,10 +129,10 @@
 		7A245044291E32FC0049EED5 /* AllMenu */ = {
 			isa = PBXGroup;
 			children = (
+				7A24505F292B3CAA0049EED5 /* AllMenuDetail */,
 				7AB3CD8B291A124C0001415F /* AllMenuViewController.swift */,
 				7A245055292372ED0049EED5 /* AllMenuViewModel.swift */,
 				7AB3CD8F291A20740001415F /* AllMenuTableViewCell.swift */,
-				7A24505B2925F1FE0049EED5 /* AllMenuDetailViewController.swift */,
 				7A24505D29275BCB0049EED5 /* AllMenuOrderViewController.swift */,
 			);
 			path = AllMenu;
@@ -141,6 +147,17 @@
 				7A1252E7291CDA150087656B /* AlertViewController.swift */,
 			);
 			path = MyMenu;
+			sourceTree = "<group>";
+		};
+		7A24505F292B3CAA0049EED5 /* AllMenuDetail */ = {
+			isa = PBXGroup;
+			children = (
+				7A24505B2925F1FE0049EED5 /* AllMenuDetailViewController.swift */,
+				7A245060292B3CF00049EED5 /* AllMenuDetailNutritionViewController.swift */,
+				7A245062292B44430049EED5 /* tallSizeViewController.swift */,
+				7A245064292B445B0049EED5 /* grandeSizeViewController.swift */,
+			);
+			path = AllMenuDetail;
 			sourceTree = "<group>";
 		};
 		7AB3CD5A2918F5EF0001415F = {
@@ -376,12 +393,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AB3CD85291909FE0001415F /* UIView.swift in Sources */,
+				7A245061292B3CF00049EED5 /* AllMenuDetailNutritionViewController.swift in Sources */,
 				7A2450582924BC600049EED5 /* UIImageView.swift in Sources */,
 				7AB3CD6B2918F5EF0001415F /* HomeViewController.swift in Sources */,
 				7AB3CD97291A395F0001415F /* Menu.swift in Sources */,
 				7AB3CD7D2918F7C50001415F /* OrderViewController.swift in Sources */,
 				7A24505C2925F1FE0049EED5 /* AllMenuDetailViewController.swift in Sources */,
 				7A1252E8291CDA150087656B /* AlertViewController.swift in Sources */,
+				7A245065292B445B0049EED5 /* grandeSizeViewController.swift in Sources */,
 				7A245056292372ED0049EED5 /* AllMenuViewModel.swift in Sources */,
 				7A24505A2924D42B0049EED5 /* LocationViewController.swift in Sources */,
 				7A1252E5291BA1930087656B /* MenuSequenceChangeViewController.swift in Sources */,
@@ -404,6 +423,7 @@
 				7AB3CD7B2918F7BF0001415F /* PayViewController.swift in Sources */,
 				7A1252E3291B856A0087656B /* MyMenuTableViewCell.swift in Sources */,
 				7AB3CD8929190D070001415F /* CALayer.swift in Sources */,
+				7A245063292B44430049EED5 /* tallSizeViewController.swift in Sources */,
 				7AB3CD90291A20740001415F /* AllMenuTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
