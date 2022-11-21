@@ -29,7 +29,6 @@ class AllMenuViewModel {
                 guard let self = `self` else { return }
                 self.loadMenusData()
             }.disposed(by: disposeBag)
-        
         return Output(menusRelay: menusRelay)
     }
     
@@ -46,7 +45,7 @@ class AllMenuViewModel {
                 print(error?.localizedDescription as Any)
                 return
             }
-
+            
             if let data = data,
                let response = response as? HTTPURLResponse,
                response.statusCode == 200 {

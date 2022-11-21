@@ -12,21 +12,21 @@ class AllMenuDetailViewController: UIViewController {
     
     private lazy var scrollView = UIScrollView().then {
         $0.backgroundColor = .clear
-//        $0.showsVerticalScrollIndicator = false
-//        $0.translatesAutoresizingMaskIntoConstraints = false
-//        $0.backgroundColor = .blue
+        //        $0.showsVerticalScrollIndicator = false
+        //        $0.translatesAutoresizingMaskIntoConstraints = false
+        //        $0.backgroundColor = .blue
     }
     
     private lazy var viewInScroll = UIView()
     
-    private lazy var bigImageView = UIImageView().then {
+    lazy var bigImageView = UIImageView().then {
         $0.image = UIImage(named: "coffee")
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
         $0.backgroundColor = .purple
     }
     
-    private lazy var titleLabel = UILabel().then {
+    lazy var titleLabel = UILabel().then {
         $0.text = "아이스 카페 아메리카노"
         $0.font = .systemFont(ofSize: 24, weight: .bold)
     }
@@ -37,14 +37,14 @@ class AllMenuDetailViewController: UIViewController {
         $0.font = .systemFont(ofSize: 12, weight: .bold)
     }
     
-    private lazy var detailLabel = UILabel().then {
+    lazy var detailLabel = UILabel().then {
         $0.text = "진한 에스프레소에 시원한 정수물과 얼음을 더하여 스타벅스의 깔끔하고 강렬한 에스프레소를 가장 부드럽고 시원하게 즐길 수 있는 커피"
         $0.font = .systemFont(ofSize: 16, weight: .medium)
         $0.textColor = UIColor.gray
         $0.numberOfLines = 0
     }
     
-    private lazy var priceLabel = UILabel().then {
+    lazy var priceLabel = UILabel().then {
         $0.text = "4,500원"
         $0.font = .systemFont(ofSize: 24, weight: .bold)
     }
@@ -61,7 +61,7 @@ class AllMenuDetailViewController: UIViewController {
     private lazy var iceBtn = UIButton().then {
         $0.setTitle("ICE", for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
-//        $0.setTitleColor(UIColor(r: 20, g: 70, b: 102), for: .normal)
+        //        $0.setTitleColor(UIColor(r: 20, g: 70, b: 102), for: .normal)
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.systemGray4.cgColor
@@ -86,7 +86,7 @@ class AllMenuDetailViewController: UIViewController {
         $0.imageEdgeInsets = .init(top: 0, left: 330, bottom: 0, right: 0)
     }
     
-//    private lazy var otherMenuView = UICollectionView()
+    //    private lazy var otherMenuView = UICollectionView()
     private lazy var othersMenuView = OthersMenuView()
     
     private lazy var orderBtnView = OrderBtnView()
@@ -105,7 +105,7 @@ class AllMenuDetailViewController: UIViewController {
         setupView()
         setupLayout()
         bindView()
-
+        
     }
 }
 
@@ -119,14 +119,14 @@ extension AllMenuDetailViewController {
     }
     private func setupLayout() {
         view.addSubviews([scrollView,
-                         orderBtnView])
+                          orderBtnView])
         
         scrollView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
             $0.bottom.equalTo(orderBtnView.snp.top)
-//            $0.width.equalTo(view.frame.width)
+            //            $0.width.equalTo(view.frame.width)
         }
         
         orderBtnView.snp.makeConstraints {
@@ -146,20 +146,20 @@ extension AllMenuDetailViewController {
         
         viewInScroll.addSubviews([
             bigImageView,
-                         titleLabel, bestLabel,
-                         detailLabel,
-                         priceLabel,
-                         hotBtn, iceBtn,
-                         detailLabelView,
-                         seperateLine,
-                         nutritionBtn,
-                         othersMenuView,
-                         ])
+            titleLabel, bestLabel,
+            detailLabel,
+            priceLabel,
+            hotBtn, iceBtn,
+            detailLabelView,
+            seperateLine,
+            nutritionBtn,
+            othersMenuView,
+        ])
         
         bigImageView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
-//            $0.height.equalTo(150)
+            //            $0.height.equalTo(150)
         }
         
         titleLabel.snp.makeConstraints {
@@ -226,8 +226,6 @@ extension AllMenuDetailViewController {
             $0.height.equalTo(200)
             $0.bottom.equalToSuperview()
         }
-        
-
     }
     
     private func bindView() {
@@ -311,7 +309,7 @@ final class OthersMenuView: UIView {
         $0.distribution = .equalSpacing
         $0.alignment = .center
         $0.spacing = 10.0
-//        $0.backgroundColor = .brown
+        //        $0.backgroundColor = .brown
     }
     
     private lazy var eachMenuStackView = UIStackView().then {
@@ -320,7 +318,7 @@ final class OthersMenuView: UIView {
         $0.alignment = .center
         $0.spacing = 10.0
         
-//        $0.backgroundColor = .brown
+        //        $0.backgroundColor = .brown
     }
     
     private lazy var coffeeImage = UIImageView().then {
@@ -348,8 +346,8 @@ final class OthersMenuView: UIView {
     }
     
     private func setupLayout() {
-    addSubviews([othersMenuLabel,
-                 scrollView])
+        addSubviews([othersMenuLabel,
+                     scrollView])
         
         othersMenuLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(30)
@@ -409,7 +407,6 @@ final class OrderBtnView: UIView {
     
     private func setupView() {
         backgroundColor = .white
-        
     }
     
     private func setupLayout() {

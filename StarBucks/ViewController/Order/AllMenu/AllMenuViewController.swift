@@ -16,6 +16,7 @@ class AllMenuViewController: UIViewController {
     
     let viewModel = AllMenuViewModel()
     let trigger = PublishRelay<Void>()
+    var beverageImg = UIImage()
     
     var menuRelay = BehaviorRelay<Menus>(value: [])
     
@@ -38,7 +39,6 @@ class AllMenuViewController: UIViewController {
         super.viewDidLoad()
         setupLayout()
         tableViewBind()
-        
         trigger.accept(())
     }
 }
@@ -71,10 +71,10 @@ extension AllMenuViewController {
     
     private func tableViewBind() {
         let req = viewModel.transform(req: .init(trigger: trigger))
+        
         req.menusRelay.bind { [weak self] menus in
             guard let self = `self` else { return }
             self.menuRelay.accept(menus)
-//            print("menus : \(menus)")
         }.disposed(by: rx.disposeBag)
         
         self.menuRelay.asDriver()
@@ -85,6 +85,7 @@ extension AllMenuViewController {
                     cell.menuImage.load(url: url)
                     let imageData = try! Data(contentsOf: url)
                     cell.menuImage.image = UIImage(data: imageData)
+                    self.beverageImg = UIImage(data: imageData) ?? UIImage.init(systemName: "clear")!
                 } else {
                     print("Image URL Not Failed")
                 }
@@ -97,8 +98,20 @@ extension AllMenuViewController {
         
         tableView.rx.modelSelected(Menu.self)
             .subscribe(onNext: { menu in
-                self.navigationController?.pushViewController(AllMenuDetailViewController(), animated: true)
-                
+                print("wooluck menu :\(menu)")
+                var AllVC = AllMenuDetailViewController()
+                AllVC.titleLabel.text = menu.name
+                AllVC.detailLabel.text = menu.description
+                AllVC.priceLabel.text = "\(menu.price)원"
+                if let url = URL(string: menu.image) {
+                    AllVC.bigImageView.load(url: url)
+                    let imageData = try! Data(contentsOf: url)
+                    AllVC.bigImageView.image = UIImage(data: imageData)
+                } else {
+                    print("Image URL Not Failed")
+                }
+//                AllVC.bigImageView.image = self.beverageImg
+                self.navigationController?.pushViewController(AllVC, animated: true)
             }).disposed(by: rx.disposeBag)
     }
 }
@@ -148,11 +161,6 @@ final class subTitleMenusView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
-        
-        beverageBtn.rx.tap
-            .bind {
-                print("beverageBtn _ Clicked")
-            }.disposed(by: rx.disposeBag)
     }
     
     required init?(coder: NSCoder) {

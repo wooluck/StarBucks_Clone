@@ -26,16 +26,14 @@ class AllMenuTableViewCell: UITableViewCell {
     }
     
     // MARK: - init()
-        override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-            super.init(style: style, reuseIdentifier: reuseIdentifier)
-
-            setupLayout()
-            
-        }
-        
-        required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 extension AllMenuTableViewCell {
@@ -59,6 +57,5 @@ extension AllMenuTableViewCell {
             $0.leading.equalTo(menuImage.snp.trailing).offset(20)
             $0.trailing.equalToSuperview().inset(20)
         }
-        
     }
 }
