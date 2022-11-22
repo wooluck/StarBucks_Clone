@@ -21,7 +21,9 @@ import NSObject_Rx
 // 전체메뉴 버튼 눌렀을 시 나오는 화면 
 class AllMenuViewController: UIViewController {
     
-    static let selectMenu = AllMenuViewController()
+    let AllNuVC = AllMenuDetailNutritionViewController()
+    
+    let selectMenu = AllMenuViewController()
     
     let viewModel = AllMenuViewModel()
     let trigger = PublishRelay<Void>()
@@ -92,7 +94,6 @@ extension AllMenuViewController {
                 guard let cell = table.dequeueReusableCell(withIdentifier: AllMenuTableViewCell.id) as? AllMenuTableViewCell else { return UITableViewCell() }
                 
                 //                if 200..<378 ~= item.id {
-                print("옴?")
                 if let url = URL(string: item.image) {
                     cell.menuImage.load(url: url)
                     let imageData = try! Data(contentsOf: url)
@@ -112,7 +113,7 @@ extension AllMenuViewController {
             .subscribe(onNext: { menu in
                 print("wooluck menu :\(menu)")
                 var AllVC = AllMenuDetailViewController()
-                var AllNuVC = AllMenuDetailNutritionViewController()
+                
                 AllVC.titleLabel.text = menu.name
                 AllVC.detailLabel.text = menu.description
                 AllVC.priceLabel.text = "\(menu.price)원"
@@ -123,10 +124,8 @@ extension AllMenuViewController {
                 } else {
                     print("Image URL Not Failed")
                 }
-                //                AllNuVC.bringKcal.accept(menu.kcal)
-                self.kcalRelay.accept(menu.kcal)
-                
-                print("wooluck menu.kacl \(AllNuVC.bringKcal)")
+                self.viewModel.menuRelay.accept(menu)
+
                 self.navigationController?.pushViewController(AllVC, animated: true)
             }).disposed(by: rx.disposeBag)
     }

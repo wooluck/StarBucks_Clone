@@ -9,11 +9,13 @@ import UIKit
 import RxCocoa
 import RxSwift
 import NSObject_Rx
+import SwiftUI
 
 class AllMenuViewModel {
     let disposeBag = DisposeBag()
     
     let menusRelay = BehaviorRelay<Menus>(value: [])
+    let menuRelay = PublishRelay<Menu>()
     
     struct Input {
         let trigger: PublishRelay<Void>
@@ -21,6 +23,7 @@ class AllMenuViewModel {
     
     struct Output {
         let menusRelay: BehaviorRelay<Menus>
+        let menuRelay: PublishRelay<Menu>
     }
     
     func transform(req: Input) -> Output {
@@ -29,7 +32,7 @@ class AllMenuViewModel {
                 guard let self = `self` else { return }
                 self.loadMenusData()
             }.disposed(by: disposeBag)
-        return Output(menusRelay: menusRelay)
+        return Output(menusRelay: menusRelay, menuRelay: menuRelay)
     }
     
     

@@ -7,14 +7,17 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
+import NSObject_Rx
+import RxRelay
 
 class AllMenuDetailViewController: UIViewController {
     
+    var bringKcal = PublishRelay<Int>()
+    
     private lazy var scrollView = UIScrollView().then {
         $0.backgroundColor = .clear
-        //        $0.showsVerticalScrollIndicator = false
-        //        $0.translatesAutoresizingMaskIntoConstraints = false
-        //        $0.backgroundColor = .blue
     }
     
     private lazy var viewInScroll = UIView()

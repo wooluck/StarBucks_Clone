@@ -11,13 +11,14 @@ import Tabman
 import Pageboy
 import RxCocoa
 import RxSwift
+import NSObject_Rx
 
 class AllMenuDetailNutritionViewController: TabmanViewController {
     
     var model = AllMenuViewModel()
     var exex = AllMenuViewController()
-    var bringKcal = PublishRelay<Int>()
-    var passKcal: Int?
+    var bringKcal = PublishRelay<Menu>()
+    lazy var passKcal: Int = 0
     
     private lazy var nutritionTitle = UILabel().then {
         $0.text = "제품 영양 정보"
@@ -44,22 +45,6 @@ class AllMenuDetailNutritionViewController: TabmanViewController {
 extension AllMenuDetailNutritionViewController {
     private func setupView() {
         view.backgroundColor = .white
-//        vcs.append(tallSizeViewController())
-//        vcs.append(grandeSizeViewController())
-//
-//        self.dataSource = self
-//
-//        let bar = TMBar.ButtonBar()
-//        bar.layout.transitionStyle = .snap
-//        bar.indicator.weight = .custom(value: 1)
-//        bar.indicator.tintColor = .black
-//        bar.layout.alignment = .centerDistributed
-//        bar.layout.interButtonSpacing = 10
-//        bar.buttons.customize { (button) in
-//            button.tintColor = .gray
-//            button.selectedTintColor = .black
-//            button.selectedFont = UIFont.systemFont(ofSize: 16, weight: .medium)
-//        }
     }
     
     private func setupLayout() {
@@ -78,38 +63,11 @@ extension AllMenuDetailNutritionViewController {
     }
     
     private func bindView() {
-        model.menusRelay.asDriver()
-            .drive(onNext:{ [weak self] kcal in
+        exex.viewModel.menuRelay
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] menu in
                 guard let self = `self` else { return }
-                
+                self.passKcal = menu.kcal
             }).disposed(by: rx.disposeBag)
     }
 }
-//
-//extension AllMenuDetailNutritionViewController: PageboyViewControllerDataSource, TMBarDataSource {
-//    func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
-//        // tab 안에 글씨 들
-//        switch index {
-//        case 0:
-//            return TMBarItem(title: " 전체 메뉴 ")
-//        case 1:
-//            return TMBarItem(title: " 나만의 메뉴 ")
-//        default:
-//            return TMBarItem(title: "전체 메뉴")
-//        }
-//    }
-//
-//    func numberOfViewControllers(in pageboyViewController:
-//                                 PageboyViewController) -> Int {
-//        return vcs.count
-//    }
-//
-//    func viewController(for pageboyViewController: PageboyViewController, at index: PageboyViewController.PageIndex) -> UIViewController? {
-//        return vcs[index]
-//    }
-//
-//    func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
-//        return .at(index: 0)
-//    }
-//
-//}
